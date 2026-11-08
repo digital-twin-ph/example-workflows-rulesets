@@ -57,7 +57,7 @@
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
-     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/clinic-visits.csv",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/2575bf514a5f1eb5c9eba591911729cc82de7610/data/clinic-visits.csv",
      "dialog": "Tabular data"
     },
     {
@@ -547,7 +547,7 @@
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
-     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/districts.csv",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/2575bf514a5f1eb5c9eba591911729cc82de7610/data/districts.csv",
      "dialog": "Tabular data"
     },
     {
@@ -894,7 +894,7 @@
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
-     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/cumulative-cases-by-week.csv",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/2575bf514a5f1eb5c9eba591911729cc82de7610/data/cumulative-cases-by-week.csv",
      "dialog": "Tabular data"
     },
     {
@@ -1110,7 +1110,7 @@
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
-     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/cumulative-cases-wide.csv",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/2575bf514a5f1eb5c9eba591911729cc82de7610/data/cumulative-cases-wide.csv",
      "dialog": "Tabular data"
     },
     {
@@ -1918,6 +1918,1142 @@
     {
      "see": "the clinics coloured by burden on the map, its key naming each band",
      "check": "Medium"
+    }
+   ]
+  },
+  {
+   "name": "Which suspected cases meet the case definition?",
+   "steps": [
+    {
+     "click": "#add-workflow",
+     "label": "Add workflow",
+     "view": "workflow"
+    },
+    {
+     "fill": "workflow-name-edit",
+     "view": "project",
+     "label": "This workflow’s name — the question it answers",
+     "value": "Which suspected cases meet the case definition?"
+    },
+    {
+     "note": "Sixteen made-up suspected cases, shaped like a measles line list. A blank is a value not recorded, never a No. Each class below is reached, and each column’s otherwise is used."
+    },
+    {
+     "add": "table_input",
+     "as": "cases"
+    },
+    {
+     "select": "cases"
+    },
+    {
+     "click": "#open-table",
+     "label": "Configure…",
+     "opens": "Tabular data"
+    },
+    {
+     "click": "#table-remote summary",
+     "label": "Or fetch from a URL",
+     "dialog": "Tabular data"
+    },
+    {
+     "fill": "table-url",
+     "label": "URL of a CSV, Stata file or zip",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/2575bf514a5f1eb5c9eba591911729cc82de7610/data/suspected-cases.csv",
+     "dialog": "Tabular data"
+    },
+    {
+     "click": "#table-fetch",
+     "label": "Fetch",
+     "dialog": "Tabular data"
+    },
+    {
+     "choose": "table-shape",
+     "label": "Shape of the file",
+     "value": "long",
+     "shown": "Long",
+     "dialog": "Tabular data"
+    },
+    {
+     "choose": "table-value",
+     "label": "Value column",
+     "value": "age_years",
+     "dialog": "Tabular data"
+    },
+    {
+     "tick": "table-keys",
+     "label": "Key columns",
+     "values": [
+      "case_id",
+      "lab_result",
+      "contact",
+      "fever",
+      "rash",
+      "cough",
+      "coryza",
+      "conjunctivitis",
+      "clinician"
+     ],
+     "dialog": "Tabular data"
+    },
+    {
+     "fill": "table-unit",
+     "label": "Unit of the value (entered by you)",
+     "value": "years",
+     "dialog": "Tabular data"
+    },
+    {
+     "click": "#table-save",
+     "label": "Apply",
+     "dialog": "Tabular data"
+    },
+    {
+     "add": "apply_ruleset",
+     "as": "rules"
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
+    },
+    {
+     "choose": "ruleset-choice",
+     "label": "Ruleset",
+     "value": "authored",
+     "shown": "Write rules for this step",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#ruleset-config #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "choose": "ruleset-records",
+     "label": "Records arrive as",
+     "value": "table",
+     "shown": "A table",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "connect": {
+      "from": "cases",
+      "to": "rules",
+      "port": "subjects"
+     }
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
+    },
+    {
+     "note": "Stage 1, the laboratory result: positive, negative, or a result still awaited."
+    },
+    {
+     "note": "Rule 1."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:labResult",
+     "shown": "lab_result"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Positive"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "lab"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "positive"
+    },
+    {
+     "note": "Rule 2."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:labResult",
+     "shown": "lab_result"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Negative"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "lab"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "negative"
+    },
+    {
+     "note": "Rule 3."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:labResult",
+     "shown": "lab_result"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Pending"
+    },
+    {
+     "click": "[data-rule=\"2\"][data-part=\"add-group\"]",
+     "label": "+ or"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-group=\"1\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:labResult",
+     "shown": "lab_result"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-group=\"1\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-group=\"1\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Indeterminate"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "lab"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "awaiting"
+    },
+    {
+     "note": "Stage 2, a link to a confirmed case."
+    },
+    {
+     "note": "Rule 4."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:contact",
+     "shown": "contact"
+    },
+    {
+     "choose": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "link"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "linked"
+    },
+    {
+     "note": "Stage 3, how the clinical definition was met: fever and a rash, with cough, coryza or conjunctivitis, are three alternatives of one rule. A rash recorded as No fails it on the record itself."
+    },
+    {
+     "note": "Rule 5."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:fever",
+     "shown": "fever"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "click": "[data-rule=\"4\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:rash",
+     "shown": "rash"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "click": "[data-rule=\"4\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:cough",
+     "shown": "cough"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "click": "[data-rule=\"4\"][data-part=\"add-group\"]",
+     "label": "+ or"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"1\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:fever",
+     "shown": "fever"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"1\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"1\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "click": "[data-rule=\"4\"][data-group=\"1\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"1\"][data-condition=\"1\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:rash",
+     "shown": "rash"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"1\"][data-condition=\"1\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"1\"][data-condition=\"1\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "click": "[data-rule=\"4\"][data-group=\"1\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"1\"][data-condition=\"2\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:coryza",
+     "shown": "coryza"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"1\"][data-condition=\"2\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"1\"][data-condition=\"2\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "click": "[data-rule=\"4\"][data-part=\"add-group\"]",
+     "label": "+ or"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"2\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:fever",
+     "shown": "fever"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"2\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"2\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "click": "[data-rule=\"4\"][data-group=\"2\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"2\"][data-condition=\"1\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:rash",
+     "shown": "rash"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"2\"][data-condition=\"1\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"2\"][data-condition=\"1\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "click": "[data-rule=\"4\"][data-group=\"2\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"2\"][data-condition=\"2\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:conjunctivitis",
+     "shown": "conjunctivitis"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"2\"][data-condition=\"2\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"2\"][data-condition=\"2\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "definition"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "by symptoms"
+    },
+    {
+     "note": "Rule 6."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"5\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:rash",
+     "shown": "rash"
+    },
+    {
+     "choose": "[data-rule=\"5\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"5\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "No"
+    },
+    {
+     "fill": "[data-rule=\"5\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "definition"
+    },
+    {
+     "fill": "[data-rule=\"5\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "no rash"
+    },
+    {
+     "note": "Stage 4, the class, read from the three columns above. Every rule names what it reads, so no two can give one case two classes."
+    },
+    {
+     "note": "Rule 7."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"6\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:lab",
+     "shown": "lab"
+    },
+    {
+     "choose": "[data-rule=\"6\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"6\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "positive"
+    },
+    {
+     "fill": "[data-rule=\"6\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "class"
+    },
+    {
+     "fill": "[data-rule=\"6\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Laboratory confirmed"
+    },
+    {
+     "note": "Rule 8."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"7\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:lab",
+     "shown": "lab"
+    },
+    {
+     "choose": "[data-rule=\"7\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"7\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "negative"
+    },
+    {
+     "fill": "[data-rule=\"7\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "class"
+    },
+    {
+     "fill": "[data-rule=\"7\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Discarded laboratory negative"
+    },
+    {
+     "note": "Is not: linked, and no positive or negative result. A result still awaited does not stop a link."
+    },
+    {
+     "note": "Rule 9."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"8\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:lab",
+     "shown": "lab"
+    },
+    {
+     "choose": "[data-rule=\"8\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "notEquals",
+     "shown": "is not"
+    },
+    {
+     "fill": "[data-rule=\"8\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "positive"
+    },
+    {
+     "click": "[data-rule=\"8\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"8\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:lab",
+     "shown": "lab"
+    },
+    {
+     "choose": "[data-rule=\"8\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "notEquals",
+     "shown": "is not"
+    },
+    {
+     "fill": "[data-rule=\"8\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "negative"
+    },
+    {
+     "click": "[data-rule=\"8\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"8\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:link",
+     "shown": "link"
+    },
+    {
+     "choose": "[data-rule=\"8\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"8\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "linked"
+    },
+    {
+     "fill": "[data-rule=\"8\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "class"
+    },
+    {
+     "fill": "[data-rule=\"8\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Epidemiologically linked"
+    },
+    {
+     "note": "Rule 10."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"9\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:lab",
+     "shown": "lab"
+    },
+    {
+     "choose": "[data-rule=\"9\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"9\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "awaiting"
+    },
+    {
+     "click": "[data-rule=\"9\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"9\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:link",
+     "shown": "link"
+    },
+    {
+     "choose": "[data-rule=\"9\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"9\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "not linked"
+    },
+    {
+     "fill": "[data-rule=\"9\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "class"
+    },
+    {
+     "fill": "[data-rule=\"9\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Awaiting a result"
+    },
+    {
+     "note": "Rule 11."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"10\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:lab",
+     "shown": "lab"
+    },
+    {
+     "choose": "[data-rule=\"10\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"10\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "none"
+    },
+    {
+     "click": "[data-rule=\"10\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"10\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:link",
+     "shown": "link"
+    },
+    {
+     "choose": "[data-rule=\"10\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"10\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "not linked"
+    },
+    {
+     "click": "[data-rule=\"10\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"10\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:definition",
+     "shown": "definition"
+    },
+    {
+     "choose": "[data-rule=\"10\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"10\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "by symptoms"
+    },
+    {
+     "fill": "[data-rule=\"10\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "class"
+    },
+    {
+     "fill": "[data-rule=\"10\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Clinically compatible"
+    },
+    {
+     "note": "Rule 12."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"11\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:lab",
+     "shown": "lab"
+    },
+    {
+     "choose": "[data-rule=\"11\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"11\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "none"
+    },
+    {
+     "click": "[data-rule=\"11\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"11\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:link",
+     "shown": "link"
+    },
+    {
+     "choose": "[data-rule=\"11\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"11\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "not linked"
+    },
+    {
+     "click": "[data-rule=\"11\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"11\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:definition",
+     "shown": "definition"
+    },
+    {
+     "choose": "[data-rule=\"11\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"11\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "no rash"
+    },
+    {
+     "fill": "[data-rule=\"11\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "class"
+    },
+    {
+     "fill": "[data-rule=\"11\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Discarded no rash"
+    },
+    {
+     "note": "Rule 13."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:lab",
+     "shown": "lab"
+    },
+    {
+     "choose": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "none"
+    },
+    {
+     "click": "[data-rule=\"12\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:link",
+     "shown": "link"
+    },
+    {
+     "choose": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "not linked"
+    },
+    {
+     "click": "[data-rule=\"12\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:definition",
+     "shown": "definition"
+    },
+    {
+     "choose": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"2\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "not met"
+    },
+    {
+     "click": "[data-rule=\"12\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"3\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:clinician",
+     "shown": "clinician"
+    },
+    {
+     "choose": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"3\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"12\"][data-group=\"0\"][data-condition=\"3\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Yes"
+    },
+    {
+     "fill": "[data-rule=\"12\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "class"
+    },
+    {
+     "fill": "[data-rule=\"12\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Clinically compatible by the clinician"
+    },
+    {
+     "note": "Each column’s otherwise: what a case takes where no rule gave the column a value. The class waits for the three it reads."
+    },
+    {
+     "click": "#rule-editor-add-otherwise",
+     "label": "+ Add an otherwise"
+    },
+    {
+     "choose": "[data-otherwise=\"0\"][data-otherwise-part=\"column\"]",
+     "label": "Column the otherwise gives a value to",
+     "value": "fwa:lab",
+     "shown": "lab"
+    },
+    {
+     "fill": "[data-otherwise=\"0\"][data-otherwise-part=\"value\"]",
+     "label": "Value where no rule gave one",
+     "value": "none"
+    },
+    {
+     "click": "#rule-editor-add-otherwise",
+     "label": "+ Add an otherwise"
+    },
+    {
+     "choose": "[data-otherwise=\"1\"][data-otherwise-part=\"column\"]",
+     "label": "Column the otherwise gives a value to",
+     "value": "fwa:link",
+     "shown": "link"
+    },
+    {
+     "fill": "[data-otherwise=\"1\"][data-otherwise-part=\"value\"]",
+     "label": "Value where no rule gave one",
+     "value": "not linked"
+    },
+    {
+     "click": "#rule-editor-add-otherwise",
+     "label": "+ Add an otherwise"
+    },
+    {
+     "choose": "[data-otherwise=\"2\"][data-otherwise-part=\"column\"]",
+     "label": "Column the otherwise gives a value to",
+     "value": "fwa:definition",
+     "shown": "definition"
+    },
+    {
+     "fill": "[data-otherwise=\"2\"][data-otherwise-part=\"value\"]",
+     "label": "Value where no rule gave one",
+     "value": "not met"
+    },
+    {
+     "click": "#rule-editor-add-otherwise",
+     "label": "+ Add an otherwise"
+    },
+    {
+     "choose": "[data-otherwise=\"3\"][data-otherwise-part=\"column\"]",
+     "label": "Column the otherwise gives a value to",
+     "value": "fwa:class",
+     "shown": "class"
+    },
+    {
+     "fill": "[data-otherwise=\"3\"][data-otherwise-part=\"value\"]",
+     "label": "Value where no rule gave one",
+     "value": "Cannot be classified"
+    },
+    {
+     "see": "two cases took the class’s otherwise, named as a default and not a rule’s conclusion",
+     "within": "#rule-editor .rule-live-summary",
+     "check": "2 records took class's otherwise."
+    },
+    {
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "note": "Count the classes, each a share of all the cases."
+    },
+    {
+     "add": "group_table",
+     "as": "classes"
+    },
+    {
+     "connect": {
+      "from": "rules",
+      "to": "classes",
+      "port": "records"
+     }
+    },
+    {
+     "select": "classes"
+    },
+    {
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Total within groups"
+    },
+    {
+     "tick": "group-keep",
+     "label": "Key columns to keep",
+     "values": [
+      "class"
+     ],
+     "dialog": "Total within groups"
+    },
+    {
+     "choose": "group-aggregate",
+     "label": "Aggregate",
+     "value": "count",
+     "shown": "Count rows",
+     "dialog": "Total within groups"
+    },
+    {
+     "click": "label:has(#group-share)",
+     "label": "Add each group's share, %",
+     "dialog": "Total within groups"
+    },
+    {
+     "click": "#config-apply",
+     "label": "Apply",
+     "dialog": "Total within groups"
+    },
+    {
+     "add": "table_output",
+     "as": "shown"
+    },
+    {
+     "connect": {
+      "from": "classes",
+      "to": "shown",
+      "port": "table"
+     }
+    },
+    {
+     "run": true
+    },
+    {
+     "see": "three clinically compatible by their symptoms, 18.8% of the sixteen",
+     "check": "18.8"
+    },
+    {
+     "see": "two that could not be classified",
+     "check": "Cannot be classified"
     }
    ]
   }

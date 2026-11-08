@@ -53,13 +53,22 @@ const steps={
 
 /** One rule's controls, named as the dialog names them. */
 const at=(r,part,extra='')=>`[data-rule="${r}"]${extra}[data-part="${part}"]`;
-const cond=(r,c)=>`[data-group="0"][data-condition="${c}"]`;
-const condition=(r,c,{field,comparator,value,setting,shown})=>[
-  ...(c?[{click:at(r,'add-condition','[data-group="0"]'),label:'+ and'}]:[]),
-  {choose:at(r,'field',cond(r,c)),label:'Field',value:predicate(field),shown:field},
-  {choose:at(r,'comparator',cond(r,c)),label:'Comparator',value:comparator,shown},
-  ...(setting?[{choose:at(r,'value-source',cond(r,c)),label:'Compared against',value:setting}]:[]),
-  ...(value!==undefined?[{fill:at(r,'value',cond(r,c)),label:'Value',value:String(value)}]:[])];
+const cond=(r,c,g=0)=>`[data-group="${g}"][data-condition="${c}"]`;
+/** One condition. `concluded` names a column another rule gave a value, read by the name the rule gave it; `group` is the
+ *  alternative it belongs to, the first by default. */
+const condition=(r,c,{field,comparator,value,setting,shown,concluded=false,group=0})=>[
+  ...(c?[{click:at(r,'add-condition',`[data-group="${group}"]`),label:'+ and'}]:[]),
+  {choose:at(r,'field',cond(r,c,group)),label:'Field',value:concluded?`fwa:${field}`:predicate(field),shown:field},
+  {choose:at(r,'comparator',cond(r,c,group)),label:'Comparator',value:comparator,shown},
+  ...(setting?[{choose:at(r,'value-source',cond(r,c,group)),label:'Compared against',value:setting}]:[]),
+  ...(value!==undefined?[{fill:at(r,'value',cond(r,c,group)),label:'Value',value:String(value)}]:[])];
+/** An alternative: "or", then its conditions. */
+const or=r=>[{click:at(r,'add-group'),label:'+ or'}];
+/** A column's otherwise, the i-th: the column and the value a record takes where no rule gave it one. */
+const otherwise=(i,column,value)=>[
+  {click:'#rule-editor-add-otherwise',label:'+ Add an otherwise'},
+  {choose:`[data-otherwise="${i}"][data-otherwise-part="column"]`,label:'Column the otherwise gives a value to',value:`fwa:${column}`,shown:column},
+  {fill:`[data-otherwise="${i}"][data-otherwise-part="value"]`,label:'Value where no rule gave one',value}];
 const category=(r,name,value)=>[
   {fill:at(r,'predicate','[data-then="0"]'),label:'Conclusion name',value:name},
   {fill:at(r,'conclusion','[data-then="0"]'),label:'Conclusion value',value}];
@@ -241,6 +250,63 @@ workflows.push({name:'Which clinics have the most cases?',steps:[
   {run:true},
   {see:'one count still unread: "about 5" is not a number, and no repair guesses one',within:'#toast',check:'1 record could not be read as declared'},
   {see:'the clinics coloured by burden on the map, its key naming each band',check:'Medium'}]});
+
+// 7. A CASE DEFINITION IN STAGES (Fieldwork experiment 192): an ordered classification written as columns, each with an
+// otherwise, and "is not" where a value must differ. The laboratory result, then a link to a confirmed case, then how the
+// clinical definition was met, then the class read from all three. Then the classes counted, each with its share.
+const is=(r,c,field,value,o={})=>condition(r,c,{field,comparator:'equals',shown:'is',value,...o});
+const isNot=(r,c,field,value,o={})=>condition(r,c,{field,comparator:'notEquals',shown:'is not',value,...o});
+const stage=(r,field,value,o)=>is(r,0,field,value,{concluded:true,...o});
+workflows.push({name:'Which suspected cases meet the case definition?',steps:[
+  ...steps.newWorkflow(),
+  ...steps.name('Which suspected cases meet the case definition?'),
+  {note:'Sixteen made-up suspected cases, shaped like a measles line list. A blank is a value not recorded, never a No. Each class below is reached, and each column’s otherwise is used.'},
+  ...steps.importTable({as:'cases',file:'suspected-cases.csv',shape:'long',
+    keys:['case_id','lab_result','contact','fever','rash','cough','coryza','conjunctivitis','clinician'],value:'age_years',unit:'years'}),
+  ...steps.rulesOn({as:'rules',from:'cases',units:{},columns:10}),
+  {note:'Stage 1, the laboratory result: positive, negative, or a result still awaited.'},
+  ...addRule(0),...is(0,0,'lab_result','Positive'),...category(0,'lab','positive'),
+  ...addRule(1),...is(1,0,'lab_result','Negative'),...category(1,'lab','negative'),
+  ...addRule(2),...is(2,0,'lab_result','Pending'),...or(2),...is(2,0,'lab_result','Indeterminate',{group:1}),...category(2,'lab','awaiting'),
+  {note:'Stage 2, a link to a confirmed case.'},
+  ...addRule(3),...is(3,0,'contact','Yes'),...category(3,'link','linked'),
+  {note:'Stage 3, how the clinical definition was met: fever and a rash, with cough, coryza or conjunctivitis, are three alternatives of one rule. A rash recorded as No fails it on the record itself.'},
+  ...addRule(4),...is(4,0,'fever','Yes'),...is(4,1,'rash','Yes'),...is(4,2,'cough','Yes'),
+  ...or(4),...is(4,0,'fever','Yes',{group:1}),...is(4,1,'rash','Yes',{group:1}),...is(4,2,'coryza','Yes',{group:1}),
+  ...or(4),...is(4,0,'fever','Yes',{group:2}),...is(4,1,'rash','Yes',{group:2}),...is(4,2,'conjunctivitis','Yes',{group:2}),
+  ...category(4,'definition','by symptoms'),
+  ...addRule(5),...is(5,0,'rash','No'),...category(5,'definition','no rash'),
+  {note:'Stage 4, the class, read from the three columns above. Every rule names what it reads, so no two can give one case two classes.'},
+  ...addRule(6),...stage(6,'lab','positive'),...category(6,'class','Laboratory confirmed'),
+  ...addRule(7),...stage(7,'lab','negative'),...category(7,'class','Discarded laboratory negative'),
+  {note:'Is not: linked, and no positive or negative result. A result still awaited does not stop a link.'},
+  ...addRule(8),...isNot(8,0,'lab','positive',{concluded:true}),...isNot(8,1,'lab','negative',{concluded:true}),
+  ...is(8,2,'link','linked',{concluded:true}),...category(8,'class','Epidemiologically linked'),
+  ...addRule(9),...stage(9,'lab','awaiting'),...is(9,1,'link','not linked',{concluded:true}),...category(9,'class','Awaiting a result'),
+  ...addRule(10),...stage(10,'lab','none'),...is(10,1,'link','not linked',{concluded:true}),...is(10,2,'definition','by symptoms',{concluded:true}),
+  ...category(10,'class','Clinically compatible'),
+  ...addRule(11),...stage(11,'lab','none'),...is(11,1,'link','not linked',{concluded:true}),...is(11,2,'definition','no rash',{concluded:true}),
+  ...category(11,'class','Discarded no rash'),
+  ...addRule(12),...stage(12,'lab','none'),...is(12,1,'link','not linked',{concluded:true}),...is(12,2,'definition','not met',{concluded:true}),
+  ...is(12,3,'clinician','Yes'),...category(12,'class','Clinically compatible by the clinician'),
+  {note:'Each column’s otherwise: what a case takes where no rule gave the column a value. The class waits for the three it reads.'},
+  ...otherwise(0,'lab','none'),...otherwise(1,'link','not linked'),...otherwise(2,'definition','not met'),
+  ...otherwise(3,'class','Cannot be classified'),
+  {see:'two cases took the class’s otherwise, named as a default and not a rule’s conclusion',within:'#rule-editor .rule-live-summary',
+    check:"2 records took class's otherwise."},
+  ...steps.keep(),
+  {note:'Count the classes, each a share of all the cases.'},
+  {add:'group_table',as:'classes'},
+  {connect:{from:'rules',to:'classes',port:'records'}},
+  {select:'classes'},
+  {click:'#configure-step',label:'Configure…',opens:'Total within groups'},
+  {tick:'group-keep',label:'Key columns to keep',values:['class'],dialog:'Total within groups'},
+  {choose:'group-aggregate',label:'Aggregate',value:'count',shown:'Count rows',dialog:'Total within groups'},
+  {click:'label:has(#group-share)',label:"Add each group's share, %",dialog:'Total within groups'},
+  {click:'#config-apply',label:'Apply',dialog:'Total within groups'},
+  ...steps.output({as:'shown',from:'classes'}),
+  {see:'three clinically compatible by their symptoms, 18.8% of the sixteen',check:'18.8'},
+  {see:'two that could not be classified',check:'Cannot be classified'}]});
 
 writeFileSync(new URL('../manual.json',import.meta.url),JSON.stringify({
   schema:'fieldwork/worked-example-manual/1',example:'urn:fieldwork:example:workflows-rulesets',
