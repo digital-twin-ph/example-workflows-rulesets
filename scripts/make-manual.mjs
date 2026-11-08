@@ -18,18 +18,18 @@ const steps={
   name:question=>[{fill:'workflow-name-edit',view:'project',label:'This workflow’s name — the question it answers',value:question}],
   importTable:({as,file,shape,keys,values,value,unit})=>[
     {add:'table_input',as},{select:as},
-    {click:'#open-table',label:'Import tabular data',opens:'Import tabular data'},
-    {click:'#table-remote summary',label:'Or fetch from a URL',dialog:'Import tabular data'},
-    {fill:'table-url',label:'URL of a CSV, Stata file or zip',value:RAW+file,dialog:'Import tabular data'},
-    {click:'#table-fetch',label:'Fetch',dialog:'Import tabular data'},
+    {click:'#open-table',label:'Configure\u2026',opens:'Tabular data'},
+    {click:'#table-remote summary',label:'Or fetch from a URL',dialog:'Tabular data'},
+    {fill:'table-url',label:'URL of a CSV, Stata file or zip',value:RAW+file,dialog:'Tabular data'},
+    {click:'#table-fetch',label:'Fetch',dialog:'Tabular data'},
     ...(shape==='long'
-      ?[{choose:'table-shape',label:'Shape of the file',value:'long',shown:'Long',dialog:'Import tabular data'},
-        {choose:'table-value',label:'Value column',value,dialog:'Import tabular data'}]
+      ?[{choose:'table-shape',label:'Shape of the file',value:'long',shown:'Long',dialog:'Tabular data'},
+        {choose:'table-value',label:'Value column',value,dialog:'Tabular data'}]
       :[]),
-    {tick:'table-keys',label:'Key columns',values:keys,dialog:'Import tabular data'},
-    ...(shape==='wide'?[{tick:'table-values',label:'Value columns',values,dialog:'Import tabular data'}]:[]),
-    ...(unit?[{fill:'table-unit',label:'Unit of the value (entered by you)',value:unit,dialog:'Import tabular data'}]:[]),
-    {click:'#table-save',label:'Save table',dialog:'Import tabular data'}],
+    {tick:'table-keys',label:'Key columns',values:keys,dialog:'Tabular data'},
+    ...(shape==='wide'?[{tick:'table-values',label:'Value columns',values,dialog:'Tabular data'}]:[]),
+    ...(unit?[{fill:'table-unit',label:'Unit of the value (entered by you)',value:unit,dialog:'Tabular data'}]:[]),
+    {click:'#table-save',label:'Apply',dialog:'Tabular data'}],
   // A STEP WHOSE RULES ARE WRITTEN HERE, reading the table, each number it reads given its unit.
   rulesOn:({as,from,units,columns})=>[
     {add:'apply_ruleset',as},{select:as},

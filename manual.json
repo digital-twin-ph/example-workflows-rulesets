@@ -46,24 +46,24 @@
     },
     {
      "click": "#open-table",
-     "label": "Import tabular data",
-     "opens": "Import tabular data"
+     "label": "Configure…",
+     "opens": "Tabular data"
     },
     {
      "click": "#table-remote summary",
      "label": "Or fetch from a URL",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
      "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/clinic-visits.csv",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "click": "#table-fetch",
      "label": "Fetch",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "tick": "table-keys",
@@ -73,7 +73,7 @@
       "clinic",
       "visit_date"
      ],
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "tick": "table-values",
@@ -83,12 +83,12 @@
       "weight_kg",
       "temperature_c"
      ],
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "click": "#table-save",
-     "label": "Save table",
-     "dialog": "Import tabular data"
+     "label": "Apply",
+     "dialog": "Tabular data"
     },
     {
      "add": "apply_ruleset",
@@ -521,24 +521,24 @@
     },
     {
      "click": "#open-table",
-     "label": "Import tabular data",
-     "opens": "Import tabular data"
+     "label": "Configure…",
+     "opens": "Tabular data"
     },
     {
      "click": "#table-remote summary",
      "label": "Or fetch from a URL",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
      "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/districts.csv",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "click": "#table-fetch",
      "label": "Fetch",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "tick": "table-keys",
@@ -546,7 +546,7 @@
      "values": [
       "district"
      ],
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "tick": "table-values",
@@ -556,12 +556,12 @@
       "deaths",
       "population"
      ],
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "click": "#table-save",
-     "label": "Save table",
-     "dialog": "Import tabular data"
+     "label": "Apply",
+     "dialog": "Tabular data"
     },
     {
      "add": "apply_ruleset",
@@ -854,37 +854,37 @@
     },
     {
      "click": "#open-table",
-     "label": "Import tabular data",
-     "opens": "Import tabular data"
+     "label": "Configure…",
+     "opens": "Tabular data"
     },
     {
      "click": "#table-remote summary",
      "label": "Or fetch from a URL",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
      "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/cumulative-cases-by-week.csv",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "click": "#table-fetch",
      "label": "Fetch",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "choose": "table-shape",
      "label": "Shape of the file",
      "value": "long",
      "shown": "Long",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "choose": "table-value",
      "label": "Value column",
      "value": "cumulative_cases",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "tick": "table-keys",
@@ -893,18 +893,18 @@
       "place",
       "week_start"
      ],
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "fill": "table-unit",
      "label": "Unit of the value (entered by you)",
      "value": "cases",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "click": "#table-save",
-     "label": "Save table",
-     "dialog": "Import tabular data"
+     "label": "Apply",
+     "dialog": "Tabular data"
     },
     {
      "add": "apply_ruleset",
@@ -1057,24 +1057,24 @@
     },
     {
      "click": "#open-table",
-     "label": "Import tabular data",
-     "opens": "Import tabular data"
+     "label": "Configure…",
+     "opens": "Tabular data"
     },
     {
      "click": "#table-remote summary",
      "label": "Or fetch from a URL",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
      "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/cumulative-cases-wide.csv",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "click": "#table-fetch",
      "label": "Fetch",
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "tick": "table-keys",
@@ -1082,7 +1082,7 @@
      "values": [
       "place"
      ],
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "tick": "table-values",
@@ -1099,12 +1099,12 @@
       "cum_w09",
       "cum_w10"
      ],
-     "dialog": "Import tabular data"
+     "dialog": "Tabular data"
     },
     {
      "click": "#table-save",
-     "label": "Save table",
-     "dialog": "Import tabular data"
+     "label": "Apply",
+     "dialog": "Tabular data"
     },
     {
      "add": "apply_ruleset",
