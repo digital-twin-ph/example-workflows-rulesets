@@ -1,12 +1,25 @@
 # Workflows with rulesets, on synthetic data
 
-A worked example for [Fieldwork](https://github.com/digital-twin-ph/fieldwork), **in progress**. It exists to
-exercise every feature of the Apply ruleset step on data made to reach each one, and it is the test for Fieldwork
-[experiment 188](https://github.com/digital-twin-ph/fieldwork/blob/main/docs/experiments/188-rules-that-compute-and-show-their-table.md):
-when Apply ruleset can compute a column and these workflows run, Derive a value is retired.
+A worked example for [Fieldwork](https://github.com/digital-twin-ph/fieldwork). It exercises every feature of the
+Apply ruleset step on data made to reach each one, and it is the test for Fieldwork
+[experiment 188](https://github.com/digital-twin-ph/fieldwork/blob/main/docs/experiments/188-rules-that-compute-and-show-their-table.md),
+which retired Derive a value into Apply ruleset.
 
-**What is here now:** the data sets and the answers worked out by hand. **Not yet:** the workflows, their manuals and
-the project file. They need the features 188 adds, and come when those are built.
+## The workflows
+
+Open the project in Fieldwork, or build it from an empty canvas by following [manual.json](manual.json), which Fieldwork
+shows in its Manual tab. Each workflow reads one data set from this repository at a fixed commit.
+
+| Workflow | What it exercises |
+| --- | --- |
+| Which visits are under five, which had a fever, and what dose? | A category under a condition (age band, fever); a value computed under one (15 mg per kg, under 5 with a weight recorded); every comparison, *is recorded* and *is not recorded* among them; a fever threshold held as a step setting; a setting in °F refused against a temperature in °C while the rule is written |
+| Deaths per 10,000 houses, by district | A value for every row with no condition; a computed value read by a second rule; Harbour's division by zero, counted and named; two rules giving Southfield different levels, said in the preview and the run; districts no rule matches |
+| New cases each week, from a cumulative count | A rule reading the previous row, after a sort by week within place; the previous week, so East's missing week, West's repeated week and each place's first week give no value and are named; South's fall kept as computed and named |
+| New cases in week 5, from one column per week | The same sum within one row of a wide table; East's empty week 5, named |
+
+[fieldwork-project.json.gz](fieldwork-project.json.gz) is the project as the manual builds it, exported from Fieldwork.
+
+**Not yet:** a new column's unit is not described by the rule that computes it; Fieldwork does not offer that step.
 
 **All the data are made up.** No person, place or count is real. Every value is written in
 [scripts/make-data.mjs](scripts/make-data.mjs), and nothing is random, so running it again gives the same files.

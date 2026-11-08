@@ -1,0 +1,1193 @@
+{
+ "schema": "fieldwork/worked-example-manual/1",
+ "example": "urn:fieldwork:example:workflows-rulesets",
+ "intro": "Each workflow reads a made-up table from this repository, at a fixed commit, and builds its rules in Apply ruleset’s dialog. Start from an empty canvas: Project, then New project.",
+ "workflows": [
+  {
+   "name": "Which visits are under five, which had a fever, and what dose?",
+   "steps": [
+    {
+     "click": "#new-project",
+     "label": "New project",
+     "opens": "New project"
+    },
+    {
+     "fill": "project-name-input",
+     "label": "Name",
+     "value": "Rules on synthetic data",
+     "dialog": "New project"
+    },
+    {
+     "fill": "project-subject-input",
+     "label": "Subject",
+     "value": "Every feature of Apply ruleset, on data made to reach each one",
+     "dialog": "New project"
+    },
+    {
+     "click": "#project-create",
+     "label": "Create project",
+     "dialog": "New project"
+    },
+    {
+     "fill": "workflow-name-edit",
+     "view": "project",
+     "label": "This workflow’s name — the question it answers",
+     "value": "Which visits are under five, which had a fever, and what dose?"
+    },
+    {
+     "note": "Twelve made-up clinic visits. Ages 4, 5 and 6 sit either side of the under-5 rule and on it; one temperature is exactly 38.0 °C, on the fever threshold; two weights and two temperatures were not recorded."
+    },
+    {
+     "add": "table_input",
+     "as": "visits"
+    },
+    {
+     "select": "visits"
+    },
+    {
+     "click": "#open-table",
+     "label": "Import tabular data",
+     "opens": "Import tabular data"
+    },
+    {
+     "click": "#table-remote summary",
+     "label": "Or fetch from a URL",
+     "dialog": "Import tabular data"
+    },
+    {
+     "fill": "table-url",
+     "label": "URL of a CSV, Stata file or zip",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/clinic-visits.csv",
+     "dialog": "Import tabular data"
+    },
+    {
+     "click": "#table-fetch",
+     "label": "Fetch",
+     "dialog": "Import tabular data"
+    },
+    {
+     "tick": "table-keys",
+     "label": "Key columns",
+     "values": [
+      "id",
+      "clinic",
+      "visit_date"
+     ],
+     "dialog": "Import tabular data"
+    },
+    {
+     "tick": "table-values",
+     "label": "Value columns",
+     "values": [
+      "age_years",
+      "weight_kg",
+      "temperature_c"
+     ],
+     "dialog": "Import tabular data"
+    },
+    {
+     "click": "#table-save",
+     "label": "Save table",
+     "dialog": "Import tabular data"
+    },
+    {
+     "add": "apply_ruleset",
+     "as": "rules"
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#author-rules",
+     "label": "Write rules for this step",
+     "opens": "Rules"
+    },
+    {
+     "click": "#rule-editor-cancel",
+     "label": "Close without keeping"
+    },
+    {
+     "choose": "ruleset-records",
+     "label": "Records arrive as",
+     "value": "table",
+     "shown": "A table"
+    },
+    {
+     "connect": {
+      "from": "visits",
+      "to": "rules",
+      "port": "subjects"
+     }
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#use-columns",
+     "label": "Use these 6 columns"
+    },
+    {
+     "fill": "[aria-label=\"Unit for age_years\"]",
+     "label": "Unit for age_years",
+     "value": "years"
+    },
+    {
+     "fill": "[aria-label=\"Unit for weight_kg\"]",
+     "label": "Unit for weight_kg",
+     "value": "kilograms"
+    },
+    {
+     "fill": "[aria-label=\"Unit for temperature_c\"]",
+     "label": "Unit for temperature_c",
+     "value": "degrees Celsius"
+    },
+    {
+     "click": "#edit-rules",
+     "label": "Edit these rules"
+    },
+    {
+     "note": "The fever threshold is a setting of this step, so it can be changed without rewriting a rule. Give it the wrong unit first, to see it refused."
+    },
+    {
+     "click": "#rule-editor-add-setting",
+     "label": "+ Add a setting"
+    },
+    {
+     "fill": "[data-setting=\"0\"][data-setting-part=\"name\"]",
+     "label": "Setting name",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-setting=\"0\"][data-setting-part=\"value\"]",
+     "label": "Setting value",
+     "value": "100.4"
+    },
+    {
+     "fill": "[data-setting=\"0\"][data-setting-part=\"unit\"]",
+     "label": "Setting unit",
+     "value": "degrees Fahrenheit"
+    },
+    {
+     "note": "Rule 1."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:temperatureC",
+     "shown": "temperature_c"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "greaterThan",
+     "shown": "is more than"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value-source\"]",
+     "label": "Compared against",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Yes"
+    },
+    {
+     "see": "a refusal: temperature_c is in degrees Celsius and the fever setting in degrees Fahrenheit",
+     "within": "#rule-editor [role=\"alert\"]",
+     "check": "temperature_c is measured in degrees Celsius and the fever setting is in degrees Fahrenheit"
+    },
+    {
+     "fill": "[data-setting=\"0\"][data-setting-part=\"value\"]",
+     "label": "Setting value",
+     "value": "38"
+    },
+    {
+     "fill": "[data-setting=\"0\"][data-setting-part=\"unit\"]",
+     "label": "Setting unit",
+     "value": "degrees Celsius"
+    },
+    {
+     "note": "Rule 2."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:temperatureC",
+     "shown": "temperature_c"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "notGreaterThan",
+     "shown": "is at most"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value-source\"]",
+     "label": "Compared against",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "No"
+    },
+    {
+     "note": "Rule 3."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:temperatureC",
+     "shown": "temperature_c"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "__notRecorded",
+     "shown": "is not recorded"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "NotMeasured"
+    },
+    {
+     "note": "Rule 4."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:ageYears",
+     "shown": "age_years"
+    },
+    {
+     "choose": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "lessThan",
+     "shown": "is less than"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "5"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "band"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "UnderFive"
+    },
+    {
+     "note": "Rule 5."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:ageYears",
+     "shown": "age_years"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "notLessThan",
+     "shown": "is at least"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "5"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "band"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "FiveOrOver"
+    },
+    {
+     "note": "A value computed under a condition: a dose of 15 mg per kilogram, for a child under five whose weight was recorded."
+    },
+    {
+     "note": "Rule 6."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"5\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:ageYears",
+     "shown": "age_years"
+    },
+    {
+     "choose": "[data-rule=\"5\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "lessThan",
+     "shown": "is less than"
+    },
+    {
+     "fill": "[data-rule=\"5\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "5"
+    },
+    {
+     "click": "[data-rule=\"5\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"5\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:weightKg",
+     "shown": "weight_kg"
+    },
+    {
+     "choose": "[data-rule=\"5\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "__recorded",
+     "shown": "is recorded"
+    },
+    {
+     "choose": "[data-rule=\"5\"][data-then=\"0\"][data-part=\"then-kind\"]",
+     "label": "Kind of conclusion",
+     "value": "computed",
+     "shown": "a computed value"
+    },
+    {
+     "fill": "[data-rule=\"5\"][data-then=\"0\"][data-part=\"column\"]",
+     "label": "New column",
+     "value": "dose mg"
+    },
+    {
+     "choose": "[data-rule=\"5\"][data-then=\"0\"][data-part=\"left-source\"]",
+     "label": "First value",
+     "value": "fwa:weightKg",
+     "shown": "weight_kg"
+    },
+    {
+     "choose": "[data-rule=\"5\"][data-then=\"0\"][data-part=\"operator\"]",
+     "label": "Operation",
+     "value": "times"
+    },
+    {
+     "choose": "[data-rule=\"5\"][data-then=\"0\"][data-part=\"right-source\"]",
+     "label": "Second value",
+     "value": "",
+     "shown": "a number"
+    },
+    {
+     "fill": "[data-rule=\"5\"][data-then=\"0\"][data-part=\"right-number\"]",
+     "label": "Second number",
+     "value": "15"
+    },
+    {
+     "note": "Rule 7."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"6\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:clinic",
+     "shown": "clinic"
+    },
+    {
+     "choose": "[data-rule=\"6\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "equals",
+     "shown": "is"
+    },
+    {
+     "fill": "[data-rule=\"6\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "Hillside"
+    },
+    {
+     "fill": "[data-rule=\"6\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "site"
+    },
+    {
+     "fill": "[data-rule=\"6\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "North"
+    },
+    {
+     "see": "every visit banded, and the dose only for children under five with a weight",
+     "within": "#rule-editor .rule-live-summary",
+     "check": "12 records."
+    },
+    {
+     "click": "#rule-editor-keep",
+     "label": "Keep these rules"
+    },
+    {
+     "add": "table_output",
+     "as": "shown"
+    },
+    {
+     "connect": {
+      "from": "rules",
+      "to": "shown",
+      "port": "table"
+     }
+    },
+    {
+     "run": true
+    },
+    {
+     "see": "V01 under five, a fever, a dose of 181.5 mg; V03 exactly 38.0 °C, no fever; V04 not measured",
+     "check": "181.5"
+    },
+    {
+     "see": "the six Hillside visits at site North",
+     "check": "North"
+    }
+   ]
+  },
+  {
+   "name": "Deaths per 10,000 houses, by district",
+   "steps": [
+    {
+     "click": "#add-workflow",
+     "label": "Add workflow",
+     "view": "workflow"
+    },
+    {
+     "fill": "workflow-name-edit",
+     "view": "project",
+     "label": "This workflow’s name — the question it answers",
+     "value": "Deaths per 10,000 houses, by district"
+    },
+    {
+     "note": "Five made-up districts. Harbour has no houses, so deaths per house divides by zero."
+    },
+    {
+     "add": "table_input",
+     "as": "districts"
+    },
+    {
+     "select": "districts"
+    },
+    {
+     "click": "#open-table",
+     "label": "Import tabular data",
+     "opens": "Import tabular data"
+    },
+    {
+     "click": "#table-remote summary",
+     "label": "Or fetch from a URL",
+     "dialog": "Import tabular data"
+    },
+    {
+     "fill": "table-url",
+     "label": "URL of a CSV, Stata file or zip",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/districts.csv",
+     "dialog": "Import tabular data"
+    },
+    {
+     "click": "#table-fetch",
+     "label": "Fetch",
+     "dialog": "Import tabular data"
+    },
+    {
+     "tick": "table-keys",
+     "label": "Key columns",
+     "values": [
+      "district"
+     ],
+     "dialog": "Import tabular data"
+    },
+    {
+     "tick": "table-values",
+     "label": "Value columns",
+     "values": [
+      "houses",
+      "deaths",
+      "population"
+     ],
+     "dialog": "Import tabular data"
+    },
+    {
+     "click": "#table-save",
+     "label": "Save table",
+     "dialog": "Import tabular data"
+    },
+    {
+     "add": "apply_ruleset",
+     "as": "rules"
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#author-rules",
+     "label": "Write rules for this step",
+     "opens": "Rules"
+    },
+    {
+     "click": "#rule-editor-cancel",
+     "label": "Close without keeping"
+    },
+    {
+     "choose": "ruleset-records",
+     "label": "Records arrive as",
+     "value": "table",
+     "shown": "A table"
+    },
+    {
+     "connect": {
+      "from": "districts",
+      "to": "rules",
+      "port": "subjects"
+     }
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#use-columns",
+     "label": "Use these 4 columns"
+    },
+    {
+     "fill": "[aria-label=\"Unit for houses\"]",
+     "label": "Unit for houses",
+     "value": "houses"
+    },
+    {
+     "fill": "[aria-label=\"Unit for deaths\"]",
+     "label": "Unit for deaths",
+     "value": "deaths"
+    },
+    {
+     "click": "#edit-rules",
+     "label": "Edit these rules"
+    },
+    {
+     "note": "Rule 1, for every record."
+    },
+    {
+     "click": "#rule-editor-add-every",
+     "label": "+ Add a value computed for every record"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"column\"]",
+     "label": "New column",
+     "value": "houses without a death"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"left-source\"]",
+     "label": "First value",
+     "value": "fwa:houses",
+     "shown": "houses"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"operator\"]",
+     "label": "Operation",
+     "value": "minus"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"right-source\"]",
+     "label": "Second value",
+     "value": "fwa:deaths",
+     "shown": "deaths"
+    },
+    {
+     "note": "Read before it is computed: the order the rules are listed in does not matter."
+    },
+    {
+     "note": "Rule 2, for every record."
+    },
+    {
+     "click": "#rule-editor-add-every",
+     "label": "+ Add a value computed for every record"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"column\"]",
+     "label": "New column",
+     "value": "deaths per house"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"left-source\"]",
+     "label": "First value",
+     "value": "fwa:deaths",
+     "shown": "deaths"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"operator\"]",
+     "label": "Operation",
+     "value": "dividedBy"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"right-source\"]",
+     "label": "Second value",
+     "value": "fwa:houses",
+     "shown": "houses"
+    },
+    {
+     "note": "Rule 3, for every record."
+    },
+    {
+     "click": "#rule-editor-add-every",
+     "label": "+ Add a value computed for every record"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"column\"]",
+     "label": "New column",
+     "value": "deaths per 10000 houses"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"left-source\"]",
+     "label": "First value",
+     "value": "fwa:c_deaths_per_house",
+     "shown": "deaths per house"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"operator\"]",
+     "label": "Operation",
+     "value": "times"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"right-source\"]",
+     "label": "Second value",
+     "value": "",
+     "shown": "a number"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"right-number\"]",
+     "label": "Second number",
+     "value": "10000"
+    },
+    {
+     "see": "Harbour named, its rate empty, from a division by zero",
+     "within": "#rule-editor .rule-live-summary",
+     "check": "1 record has an empty value, from a division by zero."
+    },
+    {
+     "note": "Two rules that disagree: Southfield has more than 50 deaths and more than 5,000 houses."
+    },
+    {
+     "note": "Rule 4."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:deaths",
+     "shown": "deaths"
+    },
+    {
+     "choose": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "greaterThan",
+     "shown": "is more than"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "50"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "level"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "High"
+    },
+    {
+     "note": "Rule 5."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:houses",
+     "shown": "houses"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "greaterThan",
+     "shown": "is more than"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "5000"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "level"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Low"
+    },
+    {
+     "see": "Southfield given no level, both rules named",
+     "within": "#rule-editor .rule-live-summary",
+     "check": "because two rules gave different values"
+    },
+    {
+     "click": "#rule-editor-keep",
+     "label": "Keep these rules"
+    },
+    {
+     "add": "table_output",
+     "as": "shown"
+    },
+    {
+     "connect": {
+      "from": "rules",
+      "to": "shown",
+      "port": "table"
+     }
+    },
+    {
+     "run": true
+    },
+    {
+     "see": "Northgate 145.238…; Harbour no rate",
+     "check": "145.23809523809524"
+    }
+   ]
+  },
+  {
+   "name": "New cases each week, from a cumulative count",
+   "steps": [
+    {
+     "click": "#add-workflow",
+     "label": "Add workflow",
+     "view": "workflow"
+    },
+    {
+     "fill": "workflow-name-edit",
+     "view": "project",
+     "label": "This workflow’s name — the question it answers",
+     "value": "New cases each week, from a cumulative count"
+    },
+    {
+     "note": "Four made-up places, ten weeks each, out of date order on purpose. North is clean; East has no row for 3 February; South’s count falls at week 7; West has 27 January twice."
+    },
+    {
+     "add": "table_input",
+     "as": "cumulative"
+    },
+    {
+     "select": "cumulative"
+    },
+    {
+     "click": "#open-table",
+     "label": "Import tabular data",
+     "opens": "Import tabular data"
+    },
+    {
+     "click": "#table-remote summary",
+     "label": "Or fetch from a URL",
+     "dialog": "Import tabular data"
+    },
+    {
+     "fill": "table-url",
+     "label": "URL of a CSV, Stata file or zip",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/cumulative-cases-by-week.csv",
+     "dialog": "Import tabular data"
+    },
+    {
+     "click": "#table-fetch",
+     "label": "Fetch",
+     "dialog": "Import tabular data"
+    },
+    {
+     "choose": "table-shape",
+     "label": "Shape of the file",
+     "value": "long",
+     "shown": "Long",
+     "dialog": "Import tabular data"
+    },
+    {
+     "choose": "table-value",
+     "label": "Value column",
+     "value": "cumulative_cases",
+     "dialog": "Import tabular data"
+    },
+    {
+     "tick": "table-keys",
+     "label": "Key columns",
+     "values": [
+      "place",
+      "week_start"
+     ],
+     "dialog": "Import tabular data"
+    },
+    {
+     "fill": "table-unit",
+     "label": "Unit of the value (entered by you)",
+     "value": "cases",
+     "dialog": "Import tabular data"
+    },
+    {
+     "click": "#table-save",
+     "label": "Save table",
+     "dialog": "Import tabular data"
+    },
+    {
+     "add": "apply_ruleset",
+     "as": "rules"
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#author-rules",
+     "label": "Write rules for this step",
+     "opens": "Rules"
+    },
+    {
+     "click": "#rule-editor-cancel",
+     "label": "Close without keeping"
+    },
+    {
+     "choose": "ruleset-records",
+     "label": "Records arrive as",
+     "value": "table",
+     "shown": "A table"
+    },
+    {
+     "connect": {
+      "from": "cumulative",
+      "to": "rules",
+      "port": "subjects"
+     }
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#use-columns",
+     "label": "Use these 3 columns"
+    },
+    {
+     "fill": "[aria-label=\"Unit for cumulative_cases\"]",
+     "label": "Unit for cumulative_cases",
+     "value": "cases"
+    },
+    {
+     "click": "#edit-rules",
+     "label": "Edit these rules"
+    },
+    {
+     "note": "Rule 1, for every record."
+    },
+    {
+     "click": "#rule-editor-add-every",
+     "label": "+ Add a value computed for every record"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"column\"]",
+     "label": "New column",
+     "value": "new cases"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"left-source\"]",
+     "label": "First value",
+     "value": "fwa:cumulativeCases",
+     "shown": "cumulative_cases"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"operator\"]",
+     "label": "Operation",
+     "value": "minus"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"right-source\"]",
+     "label": "Second value",
+     "value": "previous:fwa:cumulativeCases",
+     "shown": "cumulative_cases in the previous row"
+    },
+    {
+     "see": "the rule waiting for an order",
+     "within": "#rule-editor [role=\"alert\"]",
+     "check": "A rule reads the previous row, so the records need an order"
+    },
+    {
+     "choose": "rule-order-by",
+     "label": "Sort by",
+     "value": "week_start",
+     "shown": "week_start (dates)"
+    },
+    {
+     "choose": "rule-order-previous",
+     "label": "The previous row is",
+     "value": "week",
+     "shown": "the week before"
+    },
+    {
+     "see": "Before, sorted and after: four first weeks, East’s missing week, West’s repeated week and the weeks after it",
+     "within": "#rule-editor .rule-live-summary",
+     "check": "13 records have no value, because there is no single previous row."
+    },
+    {
+     "click": "#rule-editor-keep",
+     "label": "Keep these rules"
+    },
+    {
+     "add": "table_output",
+     "as": "shown"
+    },
+    {
+     "connect": {
+      "from": "rules",
+      "to": "shown",
+      "port": "table"
+     }
+    },
+    {
+     "run": true
+    },
+    {
+     "see": "South’s 17 February: −2, kept",
+     "check": "-2"
+    }
+   ]
+  },
+  {
+   "name": "New cases in week 5, from one column per week",
+   "steps": [
+    {
+     "click": "#add-workflow",
+     "label": "Add workflow",
+     "view": "workflow"
+    },
+    {
+     "fill": "workflow-name-edit",
+     "view": "project",
+     "label": "This workflow’s name — the question it answers",
+     "value": "New cases in week 5, from one column per week"
+    },
+    {
+     "note": "The same counts, one column per week, so new cases are a difference within one row. East’s week 5 is empty."
+    },
+    {
+     "add": "table_input",
+     "as": "weeks"
+    },
+    {
+     "select": "weeks"
+    },
+    {
+     "click": "#open-table",
+     "label": "Import tabular data",
+     "opens": "Import tabular data"
+    },
+    {
+     "click": "#table-remote summary",
+     "label": "Or fetch from a URL",
+     "dialog": "Import tabular data"
+    },
+    {
+     "fill": "table-url",
+     "label": "URL of a CSV, Stata file or zip",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/212561d54f5970c0a7f79b370ddc0a2ed07df192/data/cumulative-cases-wide.csv",
+     "dialog": "Import tabular data"
+    },
+    {
+     "click": "#table-fetch",
+     "label": "Fetch",
+     "dialog": "Import tabular data"
+    },
+    {
+     "tick": "table-keys",
+     "label": "Key columns",
+     "values": [
+      "place"
+     ],
+     "dialog": "Import tabular data"
+    },
+    {
+     "tick": "table-values",
+     "label": "Value columns",
+     "values": [
+      "cum_w01",
+      "cum_w02",
+      "cum_w03",
+      "cum_w04",
+      "cum_w05",
+      "cum_w06",
+      "cum_w07",
+      "cum_w08",
+      "cum_w09",
+      "cum_w10"
+     ],
+     "dialog": "Import tabular data"
+    },
+    {
+     "click": "#table-save",
+     "label": "Save table",
+     "dialog": "Import tabular data"
+    },
+    {
+     "add": "apply_ruleset",
+     "as": "rules"
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#author-rules",
+     "label": "Write rules for this step",
+     "opens": "Rules"
+    },
+    {
+     "click": "#rule-editor-cancel",
+     "label": "Close without keeping"
+    },
+    {
+     "choose": "ruleset-records",
+     "label": "Records arrive as",
+     "value": "table",
+     "shown": "A table"
+    },
+    {
+     "connect": {
+      "from": "weeks",
+      "to": "rules",
+      "port": "subjects"
+     }
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#use-columns",
+     "label": "Use these 11 columns"
+    },
+    {
+     "fill": "[aria-label=\"Unit for cum_w04\"]",
+     "label": "Unit for cum_w04",
+     "value": "cases"
+    },
+    {
+     "fill": "[aria-label=\"Unit for cum_w05\"]",
+     "label": "Unit for cum_w05",
+     "value": "cases"
+    },
+    {
+     "click": "#edit-rules",
+     "label": "Edit these rules"
+    },
+    {
+     "note": "Rule 1, for every record."
+    },
+    {
+     "click": "#rule-editor-add-every",
+     "label": "+ Add a value computed for every record"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"column\"]",
+     "label": "New column",
+     "value": "new cases week 5"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"left-source\"]",
+     "label": "First value",
+     "value": "fwa:cumW05",
+     "shown": "cum_w05"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"operator\"]",
+     "label": "Operation",
+     "value": "minus"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"right-source\"]",
+     "label": "Second value",
+     "value": "fwa:cumW04",
+     "shown": "cum_w04"
+    },
+    {
+     "see": "East named: no value, its week 5 missing",
+     "within": "#rule-editor .rule-live-summary",
+     "check": "1 record has no value, because a value to compute from is missing."
+    },
+    {
+     "click": "#rule-editor-keep",
+     "label": "Keep these rules"
+    },
+    {
+     "add": "table_output",
+     "as": "shown"
+    },
+    {
+     "connect": {
+      "from": "rules",
+      "to": "shown",
+      "port": "table"
+     }
+    },
+    {
+     "run": true
+    },
+    {
+     "see": "North 11, South 9",
+     "check": "new cases week 5"
+    }
+   ]
+  }
+ ]
+}
