@@ -1,0 +1,17 @@
+case_id,lab_result,contact,fever,rash,cough,coryza,conjunctivitis,clinician,age_years
+S01,Positive,No,Yes,Yes,Yes,,,Yes,4
+S02,Positive,Yes,Yes,Yes,,Yes,,Yes,7
+S03,Negative,Yes,Yes,Yes,Yes,,,Yes,2
+S04,Negative,,Yes,,,,,,11
+S05,,Yes,Yes,Yes,Yes,,,Yes,3
+S06,Pending,Yes,,,,,,,5
+S07,Pending,No,Yes,Yes,,,Yes,Yes,9
+S08,Indeterminate,,Yes,Yes,,,,,1
+S09,,No,Yes,Yes,Yes,,,,6
+S10,,,Yes,Yes,,,Yes,Yes,8
+S11,,Unknown,Yes,Yes,,,,Yes,2
+S12,,,,,,,,Yes,14
+S13,,No,Yes,No,Yes,,,Yes,4
+S14,,,Yes,,,,,No,10
+S15,,,,,,,,,3
+S16,,Unknown,Yes,Yes,,Yes,,,12

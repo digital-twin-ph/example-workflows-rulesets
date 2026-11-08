@@ -102,3 +102,49 @@ for(const [place,values] of Object.entries(series)){
 write('expected/new-cases.csv',['place','week_start','cumulative_cases','new_cases_previous_row',
   'new_cases_previous_week','says'],expected);
 console.log(`clinic-visits ${visits.length}, districts ${districts.length}, cumulative ${cumulative.length} rows`);
+
+// 7. SUSPECTED CASES: one row per case, made up, for a case definition in stages (Fieldwork experiment 192). Shaped
+// like a measles line list: a laboratory result, a contact with a confirmed case, the symptoms of the clinical case
+// definition (fever, a rash, and cough, coryza or conjunctivitis), and whether the clinician said the case met it.
+// Each class is reached, and each stage's otherwise is used. A blank is a value not recorded, never a No.
+const cases=[
+  // case, age, lab result, contact, fever, rash, cough, coryza, conjunctivitis, clinician says it meets the definition
+  ['S01',4,'Positive','No','Yes','Yes','Yes','','','Yes'],
+  ['S02',7,'Positive','Yes','Yes','Yes','','Yes','','Yes'],
+  ['S03',2,'Negative','Yes','Yes','Yes','Yes','','','Yes'],
+  ['S04',11,'Negative','','Yes','','','','',''],
+  ['S05',3,'','Yes','Yes','Yes','Yes','','','Yes'],
+  ['S06',5,'Pending','Yes','','','','','',''],
+  ['S07',9,'Pending','No','Yes','Yes','','','Yes','Yes'],
+  ['S08',1,'Indeterminate','','Yes','Yes','','','',''],
+  ['S09',6,'','No','Yes','Yes','Yes','','',''],
+  ['S10',8,'','','Yes','Yes','','','Yes','Yes'],
+  ['S11',2,'','Unknown','Yes','Yes','','','','Yes'],
+  ['S12',14,'','','','','','','','Yes'],
+  ['S13',4,'','No','Yes','No','Yes','','','Yes'],
+  ['S14',10,'','','Yes','','','','','No'],
+  ['S15',3,'','','','','','','',''],
+  ['S16',12,'','Unknown','Yes','Yes','','Yes','',''],
+].map(([case_id,age_years,lab_result,contact,fever,rash,cough,coryza,conjunctivitis,clinician])=>
+  ({case_id,age_years,lab_result,contact,fever,rash,cough,coryza,conjunctivitis,clinician}));
+const caseColumns=['case_id','lab_result','contact','fever','rash','cough','coryza','conjunctivitis','clinician','age_years'];
+write('data/suspected-cases.csv',caseColumns,cases);
+// THE EXPECTED CLASS, worked here from the rules as stated, independently of Fieldwork.
+const classOf=c=>{
+  const lab=c.lab_result==='Positive'?'positive':c.lab_result==='Negative'?'negative':['Pending','Indeterminate'].includes(c.lab_result)?'awaiting':'none';
+  const link=c.contact==='Yes'?'linked':'not linked';
+  const definition=c.fever==='Yes'&&c.rash==='Yes'&&[c.cough,c.coryza,c.conjunctivitis].includes('Yes')?'by symptoms'
+    :c.rash==='No'?'no rash':'not met';
+  if(lab==='positive')return [lab,link,definition,'Laboratory confirmed'];
+  if(lab==='negative')return [lab,link,definition,'Discarded laboratory negative'];
+  if(link==='linked')return [lab,link,definition,'Epidemiologically linked'];
+  if(lab==='awaiting')return [lab,link,definition,'Awaiting a result'];
+  if(definition==='by symptoms')return [lab,link,definition,'Clinically compatible'];
+  if(definition==='no rash')return [lab,link,definition,'Discarded no rash'];
+  if(c.clinician==='Yes')return [lab,link,definition,'Clinically compatible by the clinician'];
+  return [lab,link,definition,'Cannot be classified'];
+};
+write('expected/case-classes.csv',['case_id','lab','link','definition','class'],
+  cases.map(c=>{const [lab,link,definition,klass]=classOf(c);return {case_id:c.case_id,lab,link,definition,class:klass};}));
+const tally=cases.reduce((t,c)=>{const k=classOf(c)[3];t[k]=(t[k]??0)+1;return t;},{});
+console.log('suspected cases',cases.length,JSON.stringify(tally));

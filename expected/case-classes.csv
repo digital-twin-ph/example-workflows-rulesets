@@ -1,0 +1,17 @@
+case_id,lab,link,definition,class
+S01,positive,not linked,by symptoms,Laboratory confirmed
+S02,positive,linked,by symptoms,Laboratory confirmed
+S03,negative,linked,by symptoms,Discarded laboratory negative
+S04,negative,not linked,not met,Discarded laboratory negative
+S05,none,linked,by symptoms,Epidemiologically linked
+S06,awaiting,linked,not met,Epidemiologically linked
+S07,awaiting,not linked,by symptoms,Awaiting a result
+S08,awaiting,not linked,not met,Awaiting a result
+S09,none,not linked,by symptoms,Clinically compatible
+S10,none,not linked,by symptoms,Clinically compatible
+S11,none,not linked,not met,Clinically compatible by the clinician
+S12,none,not linked,not met,Clinically compatible by the clinician
+S13,none,not linked,no rash,Discarded no rash
+S14,none,not linked,not met,Cannot be classified
+S15,none,not linked,not met,Cannot be classified
+S16,none,not linked,by symptoms,Clinically compatible
