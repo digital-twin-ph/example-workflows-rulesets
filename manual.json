@@ -424,6 +424,11 @@
      "value": "15"
     },
     {
+     "fill": "[data-rule=\"5\"][data-then=\"0\"][data-part=\"unit\"]",
+     "label": "Unit of the new column",
+     "value": "milligrams"
+    },
+    {
      "note": "Rule 7."
     },
     {
@@ -638,6 +643,11 @@
      "shown": "deaths"
     },
     {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"unit\"]",
+     "label": "Unit of the new column",
+     "value": "houses"
+    },
+    {
      "note": "Read before it is computed: the order the rules are listed in does not matter."
     },
     {
@@ -668,6 +678,11 @@
      "label": "Second value",
      "value": "fwa:houses",
      "shown": "houses"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"unit\"]",
+     "label": "Unit of the new column",
+     "value": "deaths per house"
     },
     {
      "note": "Rule 3, for every record."
@@ -702,6 +717,11 @@
      "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"right-number\"]",
      "label": "Second number",
      "value": "10000"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"unit\"]",
+     "label": "Unit of the new column",
+     "value": "deaths per 10,000 houses"
     },
     {
      "see": "Harbour named, its rate empty, from a division by zero",
@@ -961,6 +981,11 @@
      "shown": "cumulative_cases in the previous row"
     },
     {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"unit\"]",
+     "label": "Unit of the new column",
+     "value": "cases"
+    },
+    {
      "see": "the rule waiting for an order",
      "within": "#rule-editor [role=\"alert\"]",
      "check": "A rule reads the previous row, so the records need an order"
@@ -1159,6 +1184,11 @@
      "label": "Second value",
      "value": "fwa:cumW04",
      "shown": "cum_w04"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"unit\"]",
+     "label": "Unit of the new column",
+     "value": "cases"
     },
     {
      "see": "East named: no value, its week 5 missing",

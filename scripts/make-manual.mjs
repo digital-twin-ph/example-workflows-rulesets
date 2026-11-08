@@ -67,12 +67,14 @@ const operand=(r,side,o)=>typeof o==='number'
     value:o.computed?`fwa:c_${o.computed.replace(/[^A-Za-z0-9]+/g,'_')}`:o.previous?`previous:${predicate(o.previous)}`:predicate(o.column),
     shown:o.computed??(o.previous?`${o.previous} in the previous row`:o.column)}];
 const OPERATOR={'-':'minus','+':'plus','*':'times','/':'dividedBy'};
-const computed=(r,column,left,op,right,{kindFirst=false}={})=>[
+const computed=(r,column,left,op,right,{kindFirst=false,unit}={})=>[
   ...(kindFirst?[{choose:at(r,'then-kind','[data-then="0"]'),label:'Kind of conclusion',value:'computed',shown:'a computed value'}]:[]),
   {fill:at(r,'column','[data-then="0"]'),label:'New column',value:column},
   ...operand(r,'left',left),
   {choose:at(r,'operator','[data-then="0"]'),label:'Operation',value:OPERATOR[op]},
-  ...operand(r,'right',right)];
+  ...operand(r,'right',right),
+  // The new column's unit, stated where the column is made.
+  ...(unit?[{fill:at(r,'unit','[data-then="0"]'),label:'Unit of the new column',value:unit}]:[])];
 const addRule=r=>[{note:`Rule ${r+1}.`},{click:'#rule-editor-add',label:'+ Add a rule'}];
 const addEvery=r=>[{note:`Rule ${r+1}, for every record.`},{click:'#rule-editor-add-every',label:'+ Add a value computed for every record'}];
 
@@ -108,7 +110,7 @@ workflows.push({name:'Which visits are under five, which had a fever, and what d
   {note:'A value computed under a condition: a dose of 15 mg per kilogram, for a child under five whose weight was recorded.'},
   ...addRule(5),...condition(5,0,{field:'age_years',comparator:'lessThan',shown:'is less than',value:5}),
   ...condition(5,1,{field:'weight_kg',comparator:'__recorded',shown:'is recorded'}),
-  ...computed(5,'dose mg',{column:'weight_kg'},'*',15,{kindFirst:true}),
+  ...computed(5,'dose mg',{column:'weight_kg'},'*',15,{kindFirst:true,unit:'milligrams'}),
   ...addRule(6),...condition(6,0,{field:'clinic',comparator:'equals',shown:'is',value:'Hillside'}),
   ...category(6,'site','North'),
   {see:'every visit banded, and the dose only for children under five with a weight',within:'#rule-editor .rule-live-summary',check:'12 records.'},
@@ -124,10 +126,10 @@ workflows.push({name:'Deaths per 10,000 houses, by district',steps:[
   {note:'Five made-up districts. Harbour has no houses, so deaths per house divides by zero.'},
   ...steps.importTable({as:'districts',file:'districts.csv',shape:'wide',keys:['district'],values:['houses','deaths','population']}),
   ...steps.rulesOn({as:'rules',from:'districts',units:{houses:'houses',deaths:'deaths'},columns:4}),
-  ...addEvery(0),...computed(0,'houses without a death',{column:'houses'},'-',{column:'deaths'}),
+  ...addEvery(0),...computed(0,'houses without a death',{column:'houses'},'-',{column:'deaths'},{unit:'houses'}),
   {note:'Read before it is computed: the order the rules are listed in does not matter.'},
-  ...addEvery(1),...computed(1,'deaths per house',{column:'deaths'},'/',{column:'houses'}),
-  ...addEvery(2),...computed(2,'deaths per 10000 houses',{computed:'deaths per house'},'*',10000),
+  ...addEvery(1),...computed(1,'deaths per house',{column:'deaths'},'/',{column:'houses'},{unit:'deaths per house'}),
+  ...addEvery(2),...computed(2,'deaths per 10000 houses',{computed:'deaths per house'},'*',10000,{unit:'deaths per 10,000 houses'}),
   {see:'Harbour named, its rate empty, from a division by zero',within:'#rule-editor .rule-live-summary',
     check:'1 record has an empty value, from a division by zero.'},
   {note:'Two rules that disagree: Southfield has more than 50 deaths and more than 5,000 houses.'},
@@ -146,7 +148,7 @@ workflows.push({name:'New cases each week, from a cumulative count',steps:[
   ...steps.importTable({as:'cumulative',file:'cumulative-cases-by-week.csv',shape:'long',value:'cumulative_cases',
     keys:['place','week_start'],unit:'cases'}),
   ...steps.rulesOn({as:'rules',from:'cumulative',units:{cumulative_cases:'cases'},columns:3}),
-  ...addEvery(0),...computed(0,'new cases',{column:'cumulative_cases'},'-',{previous:'cumulative_cases'}),
+  ...addEvery(0),...computed(0,'new cases',{column:'cumulative_cases'},'-',{previous:'cumulative_cases'},{unit:'cases'}),
   {see:'the rule waiting for an order',within:'#rule-editor [role="alert"]',check:'A rule reads the previous row, so the records need an order'},
   {choose:'rule-order-by',label:'Sort by',value:'week_start',shown:'week_start (dates)'},
   {choose:'rule-order-previous',label:'The previous row is',value:'week',shown:'the week before'},
@@ -164,7 +166,7 @@ workflows.push({name:'New cases in week 5, from one column per week',steps:[
   ...steps.importTable({as:'weeks',file:'cumulative-cases-wide.csv',shape:'wide',keys:['place'],
     values:Array.from({length:10},(_,i)=>`cum_w${String(i+1).padStart(2,'0')}`)}),
   ...steps.rulesOn({as:'rules',from:'weeks',units:{cum_w04:'cases',cum_w05:'cases'},columns:11}),
-  ...addEvery(0),...computed(0,'new cases week 5',{column:'cum_w05'},'-',{column:'cum_w04'}),
+  ...addEvery(0),...computed(0,'new cases week 5',{column:'cum_w05'},'-',{column:'cum_w04'},{unit:'cases'}),
   {see:'East named: no value, its week 5 missing',within:'#rule-editor .rule-live-summary',
     check:'1 record has no value, because a value to compute from is missing.'},
   ...steps.keep(),

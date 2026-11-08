@@ -13,13 +13,11 @@ shows in its Manual tab. Each workflow reads one data set from this repository a
 | Workflow | What it exercises |
 | --- | --- |
 | Which visits are under five, which had a fever, and what dose? | A category under a condition (age band, fever); a value computed under one (15 mg per kg, under 5 with a weight recorded); every comparison, *is recorded* and *is not recorded* among them; a fever threshold held as a step setting; a setting in °F refused against a temperature in °C while the rule is written |
-| Deaths per 10,000 houses, by district | A value for every row with no condition; a computed value read by a second rule; Harbour's division by zero, counted and named; two rules giving Southfield different levels, said in the preview and the run; districts no rule matches |
+| Deaths per 10,000 houses, by district | A value for every row with no condition, each new column's unit stated; a computed value read by a second rule; Harbour's division by zero, counted and named; two rules giving Southfield different levels, said in the preview and the run; districts no rule matches |
 | New cases each week, from a cumulative count | A rule reading the previous row, after a sort by week within place; the previous week, so East's missing week, West's repeated week and each place's first week give no value and are named; South's fall kept as computed and named |
 | New cases in week 5, from one column per week | The same sum within one row of a wide table; East's empty week 5, named |
 
 [fieldwork-project.json.gz](fieldwork-project.json.gz) is the project as the manual builds it, exported from Fieldwork.
-
-**Not yet:** a new column's unit is not described by the rule that computes it; Fieldwork does not offer that step.
 
 **All the data are made up.** No person, place or count is real. Every value is written in
 [scripts/make-data.mjs](scripts/make-data.mjs), and nothing is random, so running it again gives the same files.
