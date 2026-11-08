@@ -6,7 +6,7 @@ const COMMIT=process.argv[2];
 if(!/^[0-9a-f]{40}$/.test(COMMIT??''))throw new Error('Give the full commit the data files are read from.');
 const RAW=`https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/${COMMIT}/data/`;
 const predicate=column=>`fwa:${column.replace(/[^A-Za-z0-9]+(.)/g,(_,c)=>c.toUpperCase()).replace(/[^A-Za-z0-9]/g,'')}`;
-const RULES='Rules';
+const RULES='Apply ruleset';
 
 const steps={
   newProject:()=>[
@@ -33,15 +33,18 @@ const steps={
   // A STEP WHOSE RULES ARE WRITTEN HERE, reading the table, each number it reads given its unit.
   rulesOn:({as,from,units,columns,records='table',port='subjects'})=>[
     {add:'apply_ruleset',as},{select:as},
-    {click:'#author-rules',label:'Write rules for this step',opens:RULES},
-    {click:'#rule-editor-cancel',label:'Close without keeping'},
-    {choose:'ruleset-records',label:'Records arrive as',value:records,shown:records==='table'?'A table':'Points'},
+    // CONFIGURE… OFFERS RULES WRITTEN HERE beside the published rulesets (Fieldwork experiments 186 and 192).
+    {click:'#configure-step',label:'Configure\u2026',opens:RULES},
+    {choose:'ruleset-choice',label:'Ruleset',value:'authored',shown:'Write rules for this step',dialog:RULES},
+    {click:'#ruleset-config #config-apply',label:'Apply',dialog:RULES},
+    {choose:'ruleset-records',label:'Records arrive as',value:records,shown:records==='table'?'A table':'Points',dialog:RULES},
+    {click:'#rule-editor #config-apply',label:'Apply',dialog:RULES},
     {connect:{from,to:as,port}},
     {select:as},
-    {click:'#use-columns',label:`Use these ${columns} columns`},
-    ...Object.entries(units).map(([column,unit])=>({fill:`[aria-label="Unit for ${column}"]`,label:`Unit for ${column}`,value:unit})),
-    {click:'#edit-rules',label:'Edit these rules'}],
-  keep:()=>[{click:'#rule-editor-keep',label:'Keep these rules'}],
+    // The rules dialog takes the connected records' ${columns} columns, and each number they read is given its unit.
+    {click:'#configure-step',label:'Configure\u2026',opens:RULES},
+    ...Object.entries(units).map(([column,unit])=>({fill:`[aria-label="Unit for ${column}"]`,label:`Unit for ${column}`,value:unit,dialog:RULES}))],
+  keep:()=>[{click:'#rule-editor #config-apply',label:'Apply',dialog:RULES}],
   output:({as,from,label})=>[
     {add:'table_output',as},
     {connect:{from,to:as,port:'table'}},
@@ -204,10 +207,9 @@ workflows.push({name:'Which clinics have the most cases?',steps:[
   {file:'input-file',label:'Local file \u00b7 5 MB maximum',path:'data/clinic-locations.geojson'},
   {click:'#input-apply',label:'Save Edits'},
   // The counts are offered as a category, because the file stores them as text. Say what they are.
-  ...steps.rulesOn({as:'rules',from:'clinics',units:{},columns:2,records:'points'}).slice(0,-1),
-  {choose:'[aria-label="Kind of cases"]',label:'Kind of cases',value:'number',shown:'number'},
-  {fill:'[aria-label="Unit for cases"]',label:'Unit for cases',value:'cases'},
-  {click:'#edit-rules',label:'Edit these rules'},
+  ...steps.rulesOn({as:'rules',from:'clinics',units:{},columns:2,records:'points'}),
+  {choose:'[aria-label="Kind of cases"]',label:'Kind of cases',value:'number',shown:'number',dialog:RULES},
+  {fill:'[aria-label="Unit for cases"]',label:'Unit for cases',value:'cases',dialog:RULES},
   ...addRule(0),...condition(0,0,{field:'cases',comparator:'lessThan',shown:'is less than',value:10}),...category(0,'burden','Low'),
   ...addRule(1),...condition(1,0,{field:'cases',comparator:'notLessThan',shown:'is at least',value:10}),
   ...condition(1,1,{field:'cases',comparator:'lessThan',shown:'is less than',value:30}),...category(1,'burden','Medium'),

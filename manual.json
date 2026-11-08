@@ -98,19 +98,33 @@
      "select": "rules"
     },
     {
-     "click": "#author-rules",
-     "label": "Write rules for this step",
-     "opens": "Rules"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
-     "click": "#rule-editor-cancel",
-     "label": "Close without keeping"
+     "choose": "ruleset-choice",
+     "label": "Ruleset",
+     "value": "authored",
+     "shown": "Write rules for this step",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#ruleset-config #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "choose": "ruleset-records",
      "label": "Records arrive as",
      "value": "table",
-     "shown": "A table"
+     "shown": "A table",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "connect": {
@@ -123,27 +137,27 @@
      "select": "rules"
     },
     {
-     "click": "#use-columns",
-     "label": "Use these 6 columns"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for age_years\"]",
      "label": "Unit for age_years",
-     "value": "years"
+     "value": "years",
+     "dialog": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for weight_kg\"]",
      "label": "Unit for weight_kg",
-     "value": "kilograms"
+     "value": "kilograms",
+     "dialog": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for temperature_c\"]",
      "label": "Unit for temperature_c",
-     "value": "degrees Celsius"
-    },
-    {
-     "click": "#edit-rules",
-     "label": "Edit these rules"
+     "value": "degrees Celsius",
+     "dialog": "Apply ruleset"
     },
     {
      "note": "The fever threshold is a setting of this step, so it can be changed without rewriting a rule. Give it the wrong unit first, to see it refused."
@@ -468,8 +482,9 @@
      "check": "12 records."
     },
     {
-     "click": "#rule-editor-keep",
-     "label": "Keep these rules"
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "add": "table_output",
@@ -571,19 +586,33 @@
      "select": "rules"
     },
     {
-     "click": "#author-rules",
-     "label": "Write rules for this step",
-     "opens": "Rules"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
-     "click": "#rule-editor-cancel",
-     "label": "Close without keeping"
+     "choose": "ruleset-choice",
+     "label": "Ruleset",
+     "value": "authored",
+     "shown": "Write rules for this step",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#ruleset-config #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "choose": "ruleset-records",
      "label": "Records arrive as",
      "value": "table",
-     "shown": "A table"
+     "shown": "A table",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "connect": {
@@ -596,22 +625,21 @@
      "select": "rules"
     },
     {
-     "click": "#use-columns",
-     "label": "Use these 4 columns"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for houses\"]",
      "label": "Unit for houses",
-     "value": "houses"
+     "value": "houses",
+     "dialog": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for deaths\"]",
      "label": "Unit for deaths",
-     "value": "deaths"
-    },
-    {
-     "click": "#edit-rules",
-     "label": "Edit these rules"
+     "value": "deaths",
+     "dialog": "Apply ruleset"
     },
     {
      "note": "Rule 1, for every record."
@@ -805,8 +833,9 @@
      "check": "because two rules gave different values"
     },
     {
-     "click": "#rule-editor-keep",
-     "label": "Keep these rules"
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "add": "table_output",
@@ -914,19 +943,33 @@
      "select": "rules"
     },
     {
-     "click": "#author-rules",
-     "label": "Write rules for this step",
-     "opens": "Rules"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
-     "click": "#rule-editor-cancel",
-     "label": "Close without keeping"
+     "choose": "ruleset-choice",
+     "label": "Ruleset",
+     "value": "authored",
+     "shown": "Write rules for this step",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#ruleset-config #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "choose": "ruleset-records",
      "label": "Records arrive as",
      "value": "table",
-     "shown": "A table"
+     "shown": "A table",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "connect": {
@@ -939,17 +982,15 @@
      "select": "rules"
     },
     {
-     "click": "#use-columns",
-     "label": "Use these 3 columns"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for cumulative_cases\"]",
      "label": "Unit for cumulative_cases",
-     "value": "cases"
-    },
-    {
-     "click": "#edit-rules",
-     "label": "Edit these rules"
+     "value": "cases",
+     "dialog": "Apply ruleset"
     },
     {
      "note": "Rule 1, for every record."
@@ -1008,8 +1049,9 @@
      "check": "13 records have no value, because there is no single previous row."
     },
     {
-     "click": "#rule-editor-keep",
-     "label": "Keep these rules"
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "add": "table_output",
@@ -1114,19 +1156,33 @@
      "select": "rules"
     },
     {
-     "click": "#author-rules",
-     "label": "Write rules for this step",
-     "opens": "Rules"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
-     "click": "#rule-editor-cancel",
-     "label": "Close without keeping"
+     "choose": "ruleset-choice",
+     "label": "Ruleset",
+     "value": "authored",
+     "shown": "Write rules for this step",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#ruleset-config #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "choose": "ruleset-records",
      "label": "Records arrive as",
      "value": "table",
-     "shown": "A table"
+     "shown": "A table",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "connect": {
@@ -1139,22 +1195,21 @@
      "select": "rules"
     },
     {
-     "click": "#use-columns",
-     "label": "Use these 11 columns"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for cum_w04\"]",
      "label": "Unit for cum_w04",
-     "value": "cases"
+     "value": "cases",
+     "dialog": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for cum_w05\"]",
      "label": "Unit for cum_w05",
-     "value": "cases"
-    },
-    {
-     "click": "#edit-rules",
-     "label": "Edit these rules"
+     "value": "cases",
+     "dialog": "Apply ruleset"
     },
     {
      "note": "Rule 1, for every record."
@@ -1196,8 +1251,9 @@
      "check": "1 record has no value, because a value to compute from is missing."
     },
     {
-     "click": "#rule-editor-keep",
-     "label": "Keep these rules"
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "add": "table_output",
@@ -1249,19 +1305,33 @@
      "select": "rules"
     },
     {
-     "click": "#author-rules",
-     "label": "Write rules for this step",
-     "opens": "Rules"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
-     "click": "#rule-editor-cancel",
-     "label": "Close without keeping"
+     "choose": "ruleset-choice",
+     "label": "Ruleset",
+     "value": "authored",
+     "shown": "Write rules for this step",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#ruleset-config #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "choose": "ruleset-records",
      "label": "Records arrive as",
      "value": "table",
-     "shown": "A table"
+     "shown": "A table",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "connect": {
@@ -1274,22 +1344,21 @@
      "select": "rules"
     },
     {
-     "click": "#use-columns",
-     "label": "Use these 6 columns"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for age_years\"]",
      "label": "Unit for age_years",
-     "value": "years"
+     "value": "years",
+     "dialog": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for temperature_c\"]",
      "label": "Unit for temperature_c",
-     "value": "degrees Celsius"
-    },
-    {
-     "click": "#edit-rules",
-     "label": "Edit these rules"
+     "value": "degrees Celsius",
+     "dialog": "Apply ruleset"
     },
     {
      "click": "#rule-editor-add-setting",
@@ -1476,8 +1545,9 @@
      "value": "FiveOrOver"
     },
     {
-     "click": "#rule-editor-keep",
-     "label": "Keep these rules"
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "add": "table_output",
@@ -1551,19 +1621,33 @@
      "select": "rules"
     },
     {
-     "click": "#author-rules",
-     "label": "Write rules for this step",
-     "opens": "Rules"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
-     "click": "#rule-editor-cancel",
-     "label": "Close without keeping"
+     "choose": "ruleset-choice",
+     "label": "Ruleset",
+     "value": "authored",
+     "shown": "Write rules for this step",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#ruleset-config #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "choose": "ruleset-records",
      "label": "Records arrive as",
      "value": "points",
-     "shown": "Points"
+     "shown": "Points",
+     "dialog": "Apply ruleset"
+    },
+    {
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "connect": {
@@ -1576,23 +1660,22 @@
      "select": "rules"
     },
     {
-     "click": "#use-columns",
-     "label": "Use these 2 columns"
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Apply ruleset"
     },
     {
      "choose": "[aria-label=\"Kind of cases\"]",
      "label": "Kind of cases",
      "value": "number",
-     "shown": "number"
+     "shown": "number",
+     "dialog": "Apply ruleset"
     },
     {
      "fill": "[aria-label=\"Unit for cases\"]",
      "label": "Unit for cases",
-     "value": "cases"
-    },
-    {
-     "click": "#edit-rules",
-     "label": "Edit these rules"
+     "value": "cases",
+     "dialog": "Apply ruleset"
     },
     {
      "note": "Rule 1."
@@ -1718,8 +1801,9 @@
      "value": "High"
     },
     {
-     "click": "#rule-editor-keep",
-     "label": "Keep these rules"
+     "click": "#rule-editor #config-apply",
+     "label": "Apply",
+     "dialog": "Apply ruleset"
     },
     {
      "note": "A map places points inside, on or outside an area: a box around the clinics, 10 by 8 km."
