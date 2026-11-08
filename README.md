@@ -8,7 +8,7 @@ which retired Derive a value into Apply ruleset.
 ## The workflows
 
 Open the project in Fieldwork, or build it from an empty canvas by following [manual.json](manual.json), which Fieldwork
-shows in its Manual tab. Each workflow reads one data set from this repository at a fixed commit.
+shows in its Manual tab. Each workflow reads one data set from this repository: the tables by URL at a fixed commit, the clinic points as a file you download from here.
 
 | Workflow | What it exercises |
 | --- | --- |
@@ -16,6 +16,8 @@ shows in its Manual tab. Each workflow reads one data set from this repository a
 | Deaths per 10,000 houses, by district | A value for every row with no condition, each new column's unit stated; a computed value read by a second rule; Harbour's division by zero, counted and named; two rules giving Southfield different levels, said in the preview and the run; districts no rule matches |
 | New cases each week, from a cumulative count | A rule reading the previous row, after a sort by week within place; the previous week, so East's missing week, West's repeated week and each place's first week give no value and are named; South's fall kept as computed and named |
 | New cases in week 5, from one column per week | The same sum within one row of a wide table; East's empty week 5, named |
+| Which visits had a fever? Rules the reasoner runs | Rules that only conclude categories, compiled to N3 and run by the reasoner, which records each conclusion in the evidence |
+| Which clinics have the most cases? | Rules over a point layer, coloured on a map by what they concluded; counts the file stores as text, declared a number, reported unreadable, then read as numbers in Data quality, with "about 5" left unread and named |
 
 [fieldwork-project.json.gz](fieldwork-project.json.gz) is the project as the manual builds it, exported from Fieldwork.
 
@@ -32,6 +34,7 @@ All are wide unless stated: one row per subject, one column per variable.
 | [data/districts.csv](data/districts.csv) | district (5) | Houses minus deaths for every row, with no condition. Deaths per 10,000 houses, which needs a computed value read by a second rule. Harbour has no houses, so that rate divides by zero |
 | [data/cumulative-cases-by-week.csv](data/cumulative-cases-by-week.csv) | place and week (40), **long** | New cases from a cumulative count, which reads the previous row. North is clean. East has no row for week 5. South's count falls at week 7, a correction in reporting. West has week 4 twice, with different values. **The rows are not in date order**, so the rule must sort by place and week first |
 | [data/cumulative-cases-wide.csv](data/cumulative-cases-wide.csv) | place (3) | The same counts, one column per week, where new cases are a sum within one row. West is left out: a week recorded twice has no single value for one cell. East's week 5 is empty |
+| [data/clinic-locations.geojson](data/clinic-locations.geojson) | clinic (7), **points** | Placed in open sea near 0° N, 0° E so none looks real. Each count is stored as text, "34" not 34, as many exports store them; Westbury's is "about 5", which no repair reads. Bands: under 10, 10 to 29, 30 or more |
 
 **Units**, which the practitioner describes in Fieldwork: `age_years` years, `weight_kg` kilograms, `temperature_c`
 degrees Celsius; `houses`, `deaths`, `population` and `cumulative_cases` are counts. A unit that disagrees, such as a

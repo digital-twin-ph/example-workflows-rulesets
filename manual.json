@@ -1218,6 +1218,624 @@
      "check": "new cases week 5"
     }
    ]
+  },
+  {
+   "name": "Which visits had a fever? Rules the reasoner runs",
+   "steps": [
+    {
+     "click": "#add-workflow",
+     "label": "Add workflow",
+     "view": "workflow"
+    },
+    {
+     "fill": "workflow-name-edit",
+     "view": "project",
+     "label": "This workflow’s name — the question it answers",
+     "value": "Which visits had a fever? Rules the reasoner runs"
+    },
+    {
+     "note": "The same twelve visits, and rules that only band them. Rules that conclude categories and compute nothing are compiled to N3 and run by the reasoner, which records each conclusion in the evidence."
+    },
+    {
+     "reuse": "table_input",
+     "from": "Which visits are under five, which had a fever, and what dose?",
+     "as": "visits"
+    },
+    {
+     "add": "apply_ruleset",
+     "as": "rules"
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#author-rules",
+     "label": "Write rules for this step",
+     "opens": "Rules"
+    },
+    {
+     "click": "#rule-editor-cancel",
+     "label": "Close without keeping"
+    },
+    {
+     "choose": "ruleset-records",
+     "label": "Records arrive as",
+     "value": "table",
+     "shown": "A table"
+    },
+    {
+     "connect": {
+      "from": "visits",
+      "to": "rules",
+      "port": "subjects"
+     }
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#use-columns",
+     "label": "Use these 6 columns"
+    },
+    {
+     "fill": "[aria-label=\"Unit for age_years\"]",
+     "label": "Unit for age_years",
+     "value": "years"
+    },
+    {
+     "fill": "[aria-label=\"Unit for temperature_c\"]",
+     "label": "Unit for temperature_c",
+     "value": "degrees Celsius"
+    },
+    {
+     "click": "#edit-rules",
+     "label": "Edit these rules"
+    },
+    {
+     "click": "#rule-editor-add-setting",
+     "label": "+ Add a setting"
+    },
+    {
+     "fill": "[data-setting=\"0\"][data-setting-part=\"name\"]",
+     "label": "Setting name",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-setting=\"0\"][data-setting-part=\"value\"]",
+     "label": "Setting value",
+     "value": "38"
+    },
+    {
+     "fill": "[data-setting=\"0\"][data-setting-part=\"unit\"]",
+     "label": "Setting unit",
+     "value": "degrees Celsius"
+    },
+    {
+     "note": "Rule 1."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:temperatureC",
+     "shown": "temperature_c"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "greaterThan",
+     "shown": "is more than"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value-source\"]",
+     "label": "Compared against",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Yes"
+    },
+    {
+     "note": "Rule 2."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:temperatureC",
+     "shown": "temperature_c"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "notGreaterThan",
+     "shown": "is at most"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value-source\"]",
+     "label": "Compared against",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "No"
+    },
+    {
+     "note": "Rule 3."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:temperatureC",
+     "shown": "temperature_c"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "__notRecorded",
+     "shown": "is not recorded"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "fever"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "NotMeasured"
+    },
+    {
+     "note": "Rule 4."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:ageYears",
+     "shown": "age_years"
+    },
+    {
+     "choose": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "lessThan",
+     "shown": "is less than"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "5"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "band"
+    },
+    {
+     "fill": "[data-rule=\"3\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "UnderFive"
+    },
+    {
+     "note": "Rule 5."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:ageYears",
+     "shown": "age_years"
+    },
+    {
+     "choose": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "notLessThan",
+     "shown": "is at least"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "5"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "band"
+    },
+    {
+     "fill": "[data-rule=\"4\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "FiveOrOver"
+    },
+    {
+     "click": "#rule-editor-keep",
+     "label": "Keep these rules"
+    },
+    {
+     "add": "table_output",
+     "as": "shown"
+    },
+    {
+     "connect": {
+      "from": "rules",
+      "to": "shown",
+      "port": "table"
+     }
+    },
+    {
+     "run": true
+    },
+    {
+     "see": "the same bands and fevers as the first workflow, concluded by the reasoner",
+     "check": "NotMeasured"
+    }
+   ]
+  },
+  {
+   "name": "Which clinics have the most cases?",
+   "steps": [
+    {
+     "click": "#add-workflow",
+     "label": "Add workflow",
+     "view": "workflow"
+    },
+    {
+     "fill": "workflow-name-edit",
+     "view": "project",
+     "label": "This workflow’s name — the question it answers",
+     "value": "Which clinics have the most cases?"
+    },
+    {
+     "note": "Seven made-up clinics, placed in open sea near 0° N, 0° E so that none looks real. The file stores each count as text: \"34\", not 34."
+    },
+    {
+     "add": "point_input",
+     "as": "clinics"
+    },
+    {
+     "select": "clinics"
+    },
+    {
+     "click": "#edit-input-data",
+     "label": "Prepare input data",
+     "opens": "Input data"
+    },
+    {
+     "choose": "input-mode",
+     "label": "Input method",
+     "value": "geojson",
+     "shown": "Import GeoJSON"
+    },
+    {
+     "file": "input-file",
+     "label": "Local file · 5 MB maximum",
+     "path": "data/clinic-locations.geojson"
+    },
+    {
+     "click": "#input-apply",
+     "label": "Save Edits"
+    },
+    {
+     "add": "apply_ruleset",
+     "as": "rules"
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#author-rules",
+     "label": "Write rules for this step",
+     "opens": "Rules"
+    },
+    {
+     "click": "#rule-editor-cancel",
+     "label": "Close without keeping"
+    },
+    {
+     "choose": "ruleset-records",
+     "label": "Records arrive as",
+     "value": "points",
+     "shown": "Points"
+    },
+    {
+     "connect": {
+      "from": "clinics",
+      "to": "rules",
+      "port": "subjects"
+     }
+    },
+    {
+     "select": "rules"
+    },
+    {
+     "click": "#use-columns",
+     "label": "Use these 2 columns"
+    },
+    {
+     "choose": "[aria-label=\"Kind of cases\"]",
+     "label": "Kind of cases",
+     "value": "number",
+     "shown": "number"
+    },
+    {
+     "fill": "[aria-label=\"Unit for cases\"]",
+     "label": "Unit for cases",
+     "value": "cases"
+    },
+    {
+     "click": "#edit-rules",
+     "label": "Edit these rules"
+    },
+    {
+     "note": "Rule 1."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:cases",
+     "shown": "cases"
+    },
+    {
+     "choose": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "lessThan",
+     "shown": "is less than"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "10"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "burden"
+    },
+    {
+     "fill": "[data-rule=\"0\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Low"
+    },
+    {
+     "note": "Rule 2."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:cases",
+     "shown": "cases"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "notLessThan",
+     "shown": "is at least"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "10"
+    },
+    {
+     "click": "[data-rule=\"1\"][data-group=\"0\"][data-part=\"add-condition\"]",
+     "label": "+ and"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:cases",
+     "shown": "cases"
+    },
+    {
+     "choose": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "lessThan",
+     "shown": "is less than"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-group=\"0\"][data-condition=\"1\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "30"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "burden"
+    },
+    {
+     "fill": "[data-rule=\"1\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "Medium"
+    },
+    {
+     "note": "Rule 3."
+    },
+    {
+     "click": "#rule-editor-add",
+     "label": "+ Add a rule"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"field\"]",
+     "label": "Field",
+     "value": "fwa:cases",
+     "shown": "cases"
+    },
+    {
+     "choose": "[data-rule=\"2\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"comparator\"]",
+     "label": "Comparator",
+     "value": "notLessThan",
+     "shown": "is at least"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-group=\"0\"][data-condition=\"0\"][data-part=\"value\"]",
+     "label": "Value",
+     "value": "30"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"predicate\"]",
+     "label": "Conclusion name",
+     "value": "burden"
+    },
+    {
+     "fill": "[data-rule=\"2\"][data-then=\"0\"][data-part=\"conclusion\"]",
+     "label": "Conclusion value",
+     "value": "High"
+    },
+    {
+     "click": "#rule-editor-keep",
+     "label": "Keep these rules"
+    },
+    {
+     "note": "A map places points inside, on or outside an area: a box around the clinics, 10 by 8 km."
+    },
+    {
+     "add": "study_area",
+     "as": "area"
+    },
+    {
+     "select": "area"
+    },
+    {
+     "click": "#edit-study-area",
+     "label": "Select area on map"
+    },
+    {
+     "click": "#area-sized-box summary",
+     "label": "Set a shape by centre coordinates"
+    },
+    {
+     "choose": "area-box-shape",
+     "label": "Shape",
+     "value": "rectangle"
+    },
+    {
+     "fill": "area-box-lon",
+     "label": "Centre longitude",
+     "value": "0.031"
+    },
+    {
+     "fill": "area-box-lat",
+     "label": "Centre latitude",
+     "value": "0.0175"
+    },
+    {
+     "fill": "area-box-width",
+     "label": "Width (metres)",
+     "value": "10000"
+    },
+    {
+     "fill": "area-box-height",
+     "label": "Height (metres)",
+     "value": "8000"
+    },
+    {
+     "click": "#area-box-create",
+     "label": "Use sized boundary"
+    },
+    {
+     "click": "#area-apply",
+     "label": "Apply study area"
+    },
+    {
+     "add": "map_output",
+     "as": "map"
+    },
+    {
+     "connect": {
+      "from": "area",
+      "to": "map",
+      "port": "area"
+     }
+    },
+    {
+     "connect": {
+      "from": "rules",
+      "to": "map",
+      "port": "points"
+     }
+    },
+    {
+     "note": "Colour each clinic by the burden its rules concluded."
+    },
+    {
+     "select": "map"
+    },
+    {
+     "choose": "[data-pin-class]",
+     "label": "Pin class for Apply ruleset",
+     "value": "burden"
+    },
+    {
+     "run": true
+    },
+    {
+     "see": "every count unread: stored as text, so no rule could read it",
+     "within": "#toast",
+     "check": "7 records could not be read as declared"
+    },
+    {
+     "note": "Read the counts as numbers, where they are: open the clinics’ rows."
+    },
+    {
+     "select": "clinics"
+    },
+    {
+     "click": "[data-records-quicklook]",
+     "label": "Quick look"
+    },
+    {
+     "click": "[data-repair]",
+     "label": "Read 6 values as numbers"
+    },
+    {
+     "run": true
+    },
+    {
+     "see": "one count still unread: \"about 5\" is not a number, and no repair guesses one",
+     "within": "#toast",
+     "check": "1 record could not be read as declared"
+    },
+    {
+     "see": "the clinics coloured by burden on the map, its key naming each band",
+     "check": "Medium"
+    }
+   ]
   }
  ]
 }

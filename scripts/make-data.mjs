@@ -61,6 +61,22 @@ write('data/cumulative-cases-wide.csv',['place',...wideColumns],
   ['North','East','South'].map(place=>Object.fromEntries([['place',place],
     ...series[place].map((v,i)=>[wideColumns[i],v??''])])));
 
+// 5. CLINIC LOCATIONS: one point per clinic, made up and placed in open sea near 0° N, 0° E so no place looks real.
+// GeoJSON whose counts are stored as text -- "34", not 34 -- as many exports store them. A rule reading `cases` as a
+// number finds none until the column is read as numbers in Data quality. One count is written "about 5", which no
+// repair reads: it stays unread and is named. Bands: under 10, 10 to 29, 30 or more.
+const clinics=[
+  {clinic:'Hillside',longitude:'0.012',latitude:'0.021',cases:'34'},
+  {clinic:'Riverbank',longitude:'0.031',latitude:'0.008',cases:'12'},
+  {clinic:'Northgate',longitude:'0.044',latitude:'0.037',cases:'7'},
+  {clinic:'Eastmarsh',longitude:'0.058',latitude:'0.015',cases:'30'},
+  {clinic:'Southfield',longitude:'0.025',latitude:'-0.006',cases:'9'},
+  {clinic:'Westbury',longitude:'-0.004',latitude:'0.029',cases:'about 5'},
+  {clinic:'Harbour',longitude:'0.066',latitude:'0.041',cases:'10'},
+];
+writeFileSync(root+'data/clinic-locations.geojson',JSON.stringify({type:'FeatureCollection',features:clinics.map(c=>(
+  {type:'Feature',properties:{clinic:c.clinic,cases:c.cases},geometry:{type:'Point',coordinates:[Number(c.longitude),Number(c.latitude)]}}))},null,1)+'\n');
+
 // New cases, by hand, under each meaning of "previous". Previous ROW: the row before, whatever its
 // week. Previous WEEK: the row seven days before, empty when there is none. West's two week-4 rows
 // have no single previous or next, so they and every West row after them get no value.

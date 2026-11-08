@@ -1,0 +1,103 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "clinic": "Hillside",
+    "cases": "34"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.012,
+     0.021
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "clinic": "Riverbank",
+    "cases": "12"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.031,
+     0.008
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "clinic": "Northgate",
+    "cases": "7"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.044,
+     0.037
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "clinic": "Eastmarsh",
+    "cases": "30"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.058,
+     0.015
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "clinic": "Southfield",
+    "cases": "9"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.025,
+     -0.006
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "clinic": "Westbury",
+    "cases": "about 5"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -0.004,
+     0.029
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "clinic": "Harbour",
+    "cases": "10"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.066,
+     0.041
+    ]
+   }
+  }
+ ]
+}
