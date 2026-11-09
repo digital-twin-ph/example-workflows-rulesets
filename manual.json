@@ -1594,8 +1594,8 @@
      "select": "clinics"
     },
     {
-     "click": "#edit-input-data",
-     "label": "Prepare input data",
+     "click": "#configure-step",
+     "label": "Configure…",
      "opens": "Input data"
     },
     {

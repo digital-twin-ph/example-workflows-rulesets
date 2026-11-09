@@ -211,7 +211,7 @@ workflows.push({name:'Which clinics have the most cases?',steps:[
   ...steps.name('Which clinics have the most cases?'),
   {note:'Seven made-up clinics, placed in open sea near 0° N, 0° E so that none looks real. The file stores each count as text: "34", not 34.'},
   {add:'point_input',as:'clinics'},{select:'clinics'},
-  {click:'#edit-input-data',label:'Prepare input data',opens:'Input data'},
+  {click:'#configure-step',label:'Configure…',opens:'Input data'},
   {choose:'input-mode',label:'Input method',value:'geojson',shown:'Import GeoJSON'},
   {file:'input-file',label:'Local file \u00b7 5 MB maximum',path:'data/clinic-locations.geojson'},
   {click:'#input-apply',label:'Save Edits'},
