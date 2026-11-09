@@ -1881,9 +1881,20 @@
      "select": "map"
     },
     {
+     "click": "#configure-step",
+     "label": "Configure…",
+     "opens": "Map"
+    },
+    {
      "choose": "[data-pin-class]",
      "label": "Pin class for Apply ruleset",
-     "value": "burden"
+     "value": "burden",
+     "dialog": "Map"
+    },
+    {
+     "click": "#map-config #config-apply",
+     "label": "Apply",
+     "dialog": "Map"
     },
     {
      "run": true
