@@ -57,7 +57,7 @@
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
-     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/2575bf514a5f1eb5c9eba591911729cc82de7610/data/clinic-visits.csv",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/362faa3e810aea3e6faa1e9497483ae129a2ab0d/data/clinic-visits.csv",
      "dialog": "Tabular data"
     },
     {
@@ -547,7 +547,7 @@
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
-     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/2575bf514a5f1eb5c9eba591911729cc82de7610/data/districts.csv",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/362faa3e810aea3e6faa1e9497483ae129a2ab0d/data/districts.csv",
      "dialog": "Tabular data"
     },
     {
@@ -894,7 +894,7 @@
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
-     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/2575bf514a5f1eb5c9eba591911729cc82de7610/data/cumulative-cases-by-week.csv",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/362faa3e810aea3e6faa1e9497483ae129a2ab0d/data/cumulative-cases-by-week.csv",
      "dialog": "Tabular data"
     },
     {
@@ -1110,7 +1110,7 @@
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
-     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/2575bf514a5f1eb5c9eba591911729cc82de7610/data/cumulative-cases-wide.csv",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/362faa3e810aea3e6faa1e9497483ae129a2ab0d/data/cumulative-cases-wide.csv",
      "dialog": "Tabular data"
     },
     {
@@ -1969,7 +1969,7 @@
     {
      "fill": "table-url",
      "label": "URL of a CSV, Stata file or zip",
-     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/2575bf514a5f1eb5c9eba591911729cc82de7610/data/suspected-cases.csv",
+     "value": "https://raw.githubusercontent.com/digital-twin-ph/example-workflows-rulesets/362faa3e810aea3e6faa1e9497483ae129a2ab0d/data/suspected-cases.csv",
      "dialog": "Tabular data"
     },
     {
