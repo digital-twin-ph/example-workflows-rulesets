@@ -45,7 +45,7 @@
      "select": "visits"
     },
     {
-     "click": "#open-table",
+     "click": "#configure-step",
      "label": "Configure…",
      "opens": "Tabular data"
     },
@@ -535,7 +535,7 @@
      "select": "districts"
     },
     {
-     "click": "#open-table",
+     "click": "#configure-step",
      "label": "Configure…",
      "opens": "Tabular data"
     },
@@ -882,7 +882,7 @@
      "select": "cumulative"
     },
     {
-     "click": "#open-table",
+     "click": "#configure-step",
      "label": "Configure…",
      "opens": "Tabular data"
     },
@@ -1098,7 +1098,7 @@
      "select": "weeks"
     },
     {
-     "click": "#open-table",
+     "click": "#configure-step",
      "label": "Configure…",
      "opens": "Tabular data"
     },
@@ -1957,7 +1957,7 @@
      "select": "cases"
     },
     {
-     "click": "#open-table",
+     "click": "#configure-step",
      "label": "Configure…",
      "opens": "Tabular data"
     },
