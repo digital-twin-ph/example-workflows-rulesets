@@ -511,7 +511,7 @@
    ]
   },
   {
-   "name": "Deaths per 10,000 houses, by district",
+   "name": "How many died per 10,000 houses in each district?",
    "steps": [
     {
      "click": "#add-workflow",
@@ -522,7 +522,7 @@
      "fill": "workflow-name-edit",
      "view": "project",
      "label": "This workflow’s name — the question it answers",
-     "value": "Deaths per 10,000 houses, by district"
+     "value": "How many died per 10,000 houses in each district?"
     },
     {
      "note": "Five made-up districts. Harbour has no houses, so deaths per house divides by zero."
@@ -858,7 +858,7 @@
    ]
   },
   {
-   "name": "New cases each week, from a cumulative count",
+   "name": "How many new cases were there each week, from a cumulative count?",
    "steps": [
     {
      "click": "#add-workflow",
@@ -869,7 +869,7 @@
      "fill": "workflow-name-edit",
      "view": "project",
      "label": "This workflow’s name — the question it answers",
-     "value": "New cases each week, from a cumulative count"
+     "value": "How many new cases were there each week, from a cumulative count?"
     },
     {
      "note": "Four made-up places, ten weeks each, out of date order on purpose. North is clean; East has no row for 3 February; South’s count falls at week 7; West has 27 January twice."
@@ -1074,7 +1074,7 @@
    ]
   },
   {
-   "name": "New cases in week 5, from one column per week",
+   "name": "How many new cases were there in week 5, from one column per week?",
    "steps": [
     {
      "click": "#add-workflow",
@@ -1085,7 +1085,7 @@
      "fill": "workflow-name-edit",
      "view": "project",
      "label": "This workflow’s name — the question it answers",
-     "value": "New cases in week 5, from one column per week"
+     "value": "How many new cases were there in week 5, from one column per week?"
     },
     {
      "note": "The same counts, one column per week, so new cases are a difference within one row. East’s week 5 is empty."
@@ -1276,7 +1276,7 @@
    ]
   },
   {
-   "name": "Which visits had a fever? Rules the reasoner runs",
+   "name": "Which visits had a fever, by rules the reasoner runs?",
    "steps": [
     {
      "click": "#add-workflow",
@@ -1287,7 +1287,7 @@
      "fill": "workflow-name-edit",
      "view": "project",
      "label": "This workflow’s name — the question it answers",
-     "value": "Which visits had a fever? Rules the reasoner runs"
+     "value": "Which visits had a fever, by rules the reasoner runs?"
     },
     {
      "note": "The same twelve visits, and rules that only band them. Rules that conclude categories and compute nothing are compiled to N3 and run by the reasoner, which records each conclusion in the evidence."

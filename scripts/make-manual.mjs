@@ -132,9 +132,9 @@ workflows.push({name:'Which visits are under five, which had a fever, and what d
   {see:'the six Hillside visits at site North',check:'North'}]});
 
 // 2. DISTRICTS: a value for every row, one read by another, a division by zero, a conflict and rows no rule matches.
-workflows.push({name:'Deaths per 10,000 houses, by district',steps:[
+workflows.push({name:'How many died per 10,000 houses in each district?',steps:[
   ...steps.newWorkflow(),
-  ...steps.name('Deaths per 10,000 houses, by district'),
+  ...steps.name('How many died per 10,000 houses in each district?'),
   {note:'Five made-up districts. Harbour has no houses, so deaths per house divides by zero.'},
   ...steps.importTable({as:'districts',file:'districts.csv',shape:'wide',keys:['district'],values:['houses','deaths','population']}),
   ...steps.rulesOn({as:'rules',from:'districts',units:{houses:'houses',deaths:'deaths'},columns:4}),
@@ -153,9 +153,9 @@ workflows.push({name:'Deaths per 10,000 houses, by district',steps:[
   {see:'Northgate 145.238…; Harbour no rate',check:'145.23809523809524'}]});
 
 // 3. CUMULATIVE CASES, LONG: the previous row, after a sort.
-workflows.push({name:'New cases each week, from a cumulative count',steps:[
+workflows.push({name:'How many new cases were there each week, from a cumulative count?',steps:[
   ...steps.newWorkflow(),
-  ...steps.name('New cases each week, from a cumulative count'),
+  ...steps.name('How many new cases were there each week, from a cumulative count?'),
   {note:'Four made-up places, ten weeks each, out of date order on purpose. North is clean; East has no row for 3 February; South’s count falls at week 7; West has 27 January twice.'},
   ...steps.importTable({as:'cumulative',file:'cumulative-cases-by-week.csv',shape:'long',value:'cumulative_cases',
     keys:['place','week_start'],unit:'cases'}),
@@ -171,9 +171,9 @@ workflows.push({name:'New cases each week, from a cumulative count',steps:[
   {see:'South’s 17 February: −2, kept',check:'-2'}]});
 
 // 4. CUMULATIVE CASES, WIDE: the same sum within one row.
-workflows.push({name:'New cases in week 5, from one column per week',steps:[
+workflows.push({name:'How many new cases were there in week 5, from one column per week?',steps:[
   ...steps.newWorkflow(),
-  ...steps.name('New cases in week 5, from one column per week'),
+  ...steps.name('How many new cases were there in week 5, from one column per week?'),
   {note:'The same counts, one column per week, so new cases are a difference within one row. East’s week 5 is empty.'},
   ...steps.importTable({as:'weeks',file:'cumulative-cases-wide.csv',shape:'wide',keys:['place'],
     values:Array.from({length:10},(_,i)=>`cum_w${String(i+1).padStart(2,'0')}`)}),
@@ -186,9 +186,9 @@ workflows.push({name:'New cases in week 5, from one column per week',steps:[
   {see:'North 11, South 9',check:'new cases week 5'}]});
 
 // 5. RULES ALL OF ONE KIND, CATEGORIES, which the N3 reasoner runs: no value is computed, so nothing is evaluated directly.
-workflows.push({name:'Which visits had a fever? Rules the reasoner runs',steps:[
+workflows.push({name:'Which visits had a fever, by rules the reasoner runs?',steps:[
   ...steps.newWorkflow(),
-  ...steps.name('Which visits had a fever? Rules the reasoner runs'),
+  ...steps.name('Which visits had a fever, by rules the reasoner runs?'),
   {note:'The same twelve visits, and rules that only band them. Rules that conclude categories and compute nothing are compiled to N3 and run by the reasoner, which records each conclusion in the evidence.'},
   {reuse:'table_input',from:'Which visits are under five, which had a fever, and what dose?',as:'visits'},
   ...steps.rulesOn({as:'rules',from:'visits',units:{age_years:'years',temperature_c:'degrees Celsius'},columns:6}),
