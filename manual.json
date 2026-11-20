@@ -1606,7 +1606,7 @@
     },
     {
      "file": "input-file",
-     "label": "Local file · 5 MB maximum",
+     "label": "Local file · 40 MB maximum",
      "path": "data/clinic-locations.geojson"
     },
     {

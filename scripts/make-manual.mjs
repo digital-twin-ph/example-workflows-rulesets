@@ -213,7 +213,7 @@ workflows.push({name:'Which clinics have the most cases?',steps:[
   {add:'point_input',as:'clinics'},{select:'clinics'},
   {click:'#configure-step',label:'Configure…',opens:'Input data'},
   {choose:'input-mode',label:'Input method',value:'geojson',shown:'Import GeoJSON'},
-  {file:'input-file',label:'Local file \u00b7 5 MB maximum',path:'data/clinic-locations.geojson'},
+  {file:'input-file',label:'Local file \u00b7 40 MB maximum',path:'data/clinic-locations.geojson'},
   {click:'#input-apply',label:'Save Edits'},
   // The counts are offered as a category, because the file stores them as text. Say what they are.
   ...steps.rulesOn({as:'rules',from:'clinics',units:{},columns:2,records:'points'}),
