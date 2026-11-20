@@ -19,7 +19,7 @@ const steps={
   importTable:({as,file,shape,keys,values,value,unit})=>[
     {add:'table_input',as},{select:as},
     {click:'#open-table',label:'Configure\u2026',opens:'Tabular data'},
-    {click:'#table-remote summary',label:'Or fetch from a URL',dialog:'Tabular data'},
+    {click:'#table-tab-remote',label:'From an address',dialog:'Tabular data'},
     {fill:'table-url',label:'URL of a CSV, Stata file or zip',value:RAW+file,dialog:'Tabular data'},
     {click:'#table-fetch',label:'Fetch',dialog:'Tabular data'},
     ...(shape==='long'
