@@ -1610,8 +1610,8 @@
      "path": "data/clinic-locations.geojson"
     },
     {
-     "click": "#input-apply",
-     "label": "Save Edits"
+     "click": "#config-apply",
+     "label": "Apply"
     },
     {
      "add": "apply_ruleset",
