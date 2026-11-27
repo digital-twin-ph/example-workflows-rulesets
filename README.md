@@ -1,8 +1,8 @@
 # Workflows with rulesets, on synthetic data
 
-A worked example for [Fieldwork](https://github.com/digital-twin-ph/fieldwork). It exercises every feature of the
+A worked example for [Fieldwork](https://github.com/fieldwork-app/fieldwork). It exercises every feature of the
 Apply ruleset step on data made to reach each one, and it is the test for Fieldwork
-[experiment 188](https://github.com/digital-twin-ph/fieldwork/blob/main/docs/experiments/188-rules-that-compute-and-show-their-table.md),
+[experiment 188](https://github.com/fieldwork-app/fieldwork/blob/main/docs/experiments/188-rules-that-compute-and-show-their-table.md),
 which retired Derive a value into Apply ruleset.
 
 ## The workflows
